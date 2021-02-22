@@ -2,6 +2,16 @@ import styled from "@emotion/styled";
 import { useFormik } from "formik";
 import { useRef } from "react";
 
+import { storageService } from "lib/firebase";
+
+interface Values {
+  sid: string;
+  name: string;
+  filename: string;
+  fileContentType: string;
+  file: ArrayBuffer;
+}
+
 const Self = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,25 +57,73 @@ const SubmitButton = styled.button`
 
 function FileUpload() {
   const fileInputRef = useRef<HTMLInputElement>();
-  const formik = useFormik({
+  const formik = useFormik<Values>({
     initialValues: {
       sid: "",
       name: "",
+      filename: "",
+      fileContentType: "",
       file: null,
     },
-    onSubmit: (value) => {
-      console.log(value);
+    onSubmit: (values) => {
+      const fileRef = storageService
+        .ref()
+        .child(`${values.sid}/${values.filename}`);
+      const uploadTask = fileRef.put(values.file, {
+        contentType: values.fileContentType,
+      });
+
+      uploadTask.on(
+        "state_changed",
+        function (snapshot) {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        function (error) {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case "storage/unauthorized":
+              // User doesn't have permission to access the object
+              break;
+
+            case "storage/canceled":
+              // User canceled the upload
+              break;
+
+            case "storage/unknown":
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        },
+        function () {
+          // Upload completed successfully, now we can get the download URL
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
     },
   });
 
   function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const reader = new FileReader();
     const file = e.currentTarget.files[0];
 
-    reader.onload = () => {
-      formik.setFieldValue("file", reader.result);
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      formik.setFieldValue("filename", file.name);
+      formik.setFieldValue("fileContentType", file.type);
+      formik.setFieldValue("file", file);
+    }
   }
 
   return (
