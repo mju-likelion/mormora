@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useFormik } from "formik";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
+import Modal from "components/Modal";
+import Portal from "components/Portal";
 import { storageService } from "lib/firebase";
 
 interface Values {
@@ -9,7 +11,7 @@ interface Values {
   name: string;
   filename: string;
   fileContentType: string;
-  file: ArrayBuffer;
+  file: File;
 }
 
 const Self = styled.div`
@@ -56,6 +58,7 @@ const SubmitButton = styled.button`
 `;
 
 function FileUpload() {
+  const [openModal, setOpenModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>();
   const formik = useFormik<Values>({
     initialValues: {
@@ -119,45 +122,68 @@ function FileUpload() {
   function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.currentTarget.files[0];
 
-    if (file) {
+    if (file.size > 10 * 1024 * 1024) {
+      // if filesize is larger than 10MB
+      console.log("You can't upload file larger than 10MB");
+      setOpenModal(true);
+    } else if (file) {
       formik.setFieldValue("filename", file.name);
       formik.setFieldValue("fileContentType", file.type);
       formik.setFieldValue("file", file);
+    } else {
+      console.log("No file");
     }
   }
 
+  function handleModalClose() {
+    setOpenModal(false);
+  }
+
   return (
-    <Self>
-      <h1>
-        멋쟁이 사자처럼 at 명지대(자연) 9기에 지원해주셔서 감사합니다.
-        <br />
-        3MB가 넘어가는 첨부파일은 이곳에 제출해주세요 🙂
-      </h1>
-      <Form onSubmit={formik.handleSubmit}>
-        <p>학번</p>
-        <TextInput
-          id="sid"
-          name="sid"
-          value={formik.values.sid}
-          onChange={formik.handleChange}
-        />
-        <p>이름</p>
-        <TextInput
-          id="name"
-          name="name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-        />
-        <FileInput type="file" ref={fileInputRef} onChange={handleFileUpload} />
-        <FileUploadButton
-          type="button"
-          onClick={() => fileInputRef.current.click()}
-        >
-          파일 업로드
-        </FileUploadButton>
-        <SubmitButton type="submit">제출</SubmitButton>
-      </Form>
-    </Self>
+    <>
+      <Self>
+        <h1>
+          멋쟁이 사자처럼 at 명지대(자연) 9기에 지원해주셔서 감사합니다.
+          <br />
+          3MB가 넘어가는 첨부파일은 이곳에 제출해주세요 🙂
+        </h1>
+        <Form onSubmit={formik.handleSubmit}>
+          <p>학번</p>
+          <TextInput
+            id="sid"
+            name="sid"
+            value={formik.values.sid}
+            onChange={formik.handleChange}
+          />
+          <p>이름</p>
+          <TextInput
+            id="name"
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+          />
+          <FileInput
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileUpload}
+          />
+          <FileUploadButton
+            type="button"
+            onClick={() => fileInputRef.current.click()}
+          >
+            파일 업로드
+          </FileUploadButton>
+          <SubmitButton type="submit">제출</SubmitButton>
+        </Form>
+      </Self>
+      {openModal && (
+        <Portal>
+          <Modal onClose={handleModalClose}>
+            10MB가 넘는 파일은 첨부할 수 없습니다.
+          </Modal>
+        </Portal>
+      )}
+    </>
   );
 }
 
