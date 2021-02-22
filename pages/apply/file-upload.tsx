@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useFormik } from "formik";
+import { useRef } from "react";
 
 const Self = styled.div`
   display: flex;
@@ -19,6 +20,10 @@ const TextInput = styled.input`
   background: #1a1b1c;
   padding: 8px 12px;
   border: 1px solid #333435;
+`;
+
+const FileInput = styled.input`
+  display: none;
 `;
 
 const FileUploadButton = styled.button`
@@ -41,16 +46,27 @@ const SubmitButton = styled.button`
 `;
 
 function FileUpload() {
+  const fileInputRef = useRef<HTMLInputElement>();
   const formik = useFormik({
     initialValues: {
       sid: "",
       name: "",
-      file: "",
+      file: null,
     },
     onSubmit: (value) => {
       console.log(value);
     },
   });
+
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onload = () => {
+      formik.setFieldValue("file", reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
 
   return (
     <Self>
@@ -74,7 +90,13 @@ function FileUpload() {
           value={formik.values.name}
           onChange={formik.handleChange}
         />
-        <FileUploadButton type="button">파일 업로드</FileUploadButton>
+        <FileInput type="file" ref={fileInputRef} onChange={handleFileUpload} />
+        <FileUploadButton
+          type="button"
+          onClick={() => fileInputRef.current.click()}
+        >
+          파일 업로드
+        </FileUploadButton>
         <SubmitButton type="submit">제출</SubmitButton>
       </Form>
     </Self>
