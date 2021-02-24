@@ -7,6 +7,10 @@ class MyDocument extends Document {
         <Head>
           <meta property='og:title' content='멋쟁이 사자처럼 at 명지대 자연' />
           <meta property='og:type' content='website' />
+          <meta
+            property='og:image'
+            content='https://mju-likelion.com/og-image.png'
+          />
           <meta property='og:url' content='https://mju-likelion.com/' />
           <meta
             property='og:description'
