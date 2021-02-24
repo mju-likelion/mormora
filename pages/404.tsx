@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import Link from "next/link";
+import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Self = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ function Custom404() {
         <ErrorCode>404</ErrorCode>
         <PrimaryMessage>이 URL은 존재하지 않는 URL이에요</PrimaryMessage>
         <SecondaryMessage>이런거 시도하지 마세요!</SecondaryMessage>
-        <Link href="/">
+        <Link href='/'>
           <GoToHomeButton>멋사 명지대 홈으로 가기</GoToHomeButton>
         </Link>
       </ErrorMessageBlock>

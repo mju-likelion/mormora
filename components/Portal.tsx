@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-function Portal({ children }) {
+interface PortalProps {
+  children: React.ReactNode;
+}
+
+function Portal({ children }: PortalProps) {
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    ref.current = document.querySelector("#modal");
+    ref.current = document.querySelector('#modal');
     setMounted(true);
   }, []);
 

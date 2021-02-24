@@ -1,4 +1,9 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+
+interface ModalProps {
+  onClose: () => void;
+  children: React.ReactNode;
+}
 
 const ModalFullScreen = styled.div`
   display: flex;
@@ -40,7 +45,7 @@ const CloseButton = styled.button`
   border-radius: 2px;
 `;
 
-function Modal({ onClose, children }) {
+function Modal({ onClose, children }: ModalProps) {
   return (
     <ModalFullScreen>
       <ModalBlock>

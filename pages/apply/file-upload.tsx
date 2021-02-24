@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import { useFormik } from "formik";
-import { useRef, useState } from "react";
+import styled from '@emotion/styled';
+import { useFormik } from 'formik';
+import { useRef, useState } from 'react';
 
-import Modal from "components/Modal";
-import Portal from "components/Portal";
-import { storageService } from "lib/firebase";
+import Modal from 'components/Modal';
+import Portal from 'components/Portal';
+import { storageService } from 'lib/firebase';
 
 interface Values {
   sid: string;
@@ -62,13 +62,13 @@ function FileUpload() {
   const fileInputRef = useRef<HTMLInputElement>();
   const formik = useFormik<Values>({
     initialValues: {
-      sid: "",
-      name: "",
-      filename: "",
-      fileContentType: "",
+      sid: '',
+      name: '',
+      filename: '',
+      fileContentType: '',
       file: null,
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       const fileRef = storageService
         .ref()
         .child(`${values.sid}/${values.filename}`);
@@ -77,44 +77,50 @@ function FileUpload() {
       });
 
       uploadTask.on(
-        "state_changed",
-        function (snapshot) {
+        'state_changed',
+        snapshot => {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // const progress =
+          //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // console.log('Upload is ' + progress + '% done');
           switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
+            case 'paused':
+              // console.log('Upload is paused');
               break;
-            case "running":
-              console.log("Upload is running");
+            case 'running':
+              // console.log('Upload is running');
+              break;
+            default:
               break;
           }
         },
-        function (error) {
+        error => {
           // A full list of error codes is available at
           // https://firebase.google.com/docs/storage/web/handle-errors
           switch (error.code) {
-            case "storage/unauthorized":
+            case 'storage/unauthorized':
               // User doesn't have permission to access the object
               break;
 
-            case "storage/canceled":
+            case 'storage/canceled':
               // User canceled the upload
               break;
 
-            case "storage/unknown":
+            case 'storage/unknown':
               // Unknown error occurred, inspect error.serverResponse
+              break;
+
+            default:
               break;
           }
         },
-        function () {
+        () => {
           // Upload completed successfully, now we can get the download URL
-          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            console.log("File available at", downloadURL);
+          uploadTask.snapshot.ref.getDownloadURL().then(() => {
+            // 콜백함수로부터 downloadUrl을 받아서
+            // console.log('File available at', downloadURL);
           });
-        }
+        },
       );
     },
   });
@@ -124,14 +130,13 @@ function FileUpload() {
 
     if (file.size > 10 * 1024 * 1024) {
       // if filesize is larger than 10MB
-      console.log("You can't upload file larger than 10MB");
       setOpenModal(true);
     } else if (file) {
-      formik.setFieldValue("filename", file.name);
-      formik.setFieldValue("fileContentType", file.type);
-      formik.setFieldValue("file", file);
+      formik.setFieldValue('filename', file.name);
+      formik.setFieldValue('fileContentType', file.type);
+      formik.setFieldValue('file', file);
     } else {
-      console.log("No file");
+      // TODO: 파일이 없을 경우 Modal을 띄워야 함
     }
   }
 
@@ -150,30 +155,30 @@ function FileUpload() {
         <Form onSubmit={formik.handleSubmit}>
           <p>학번</p>
           <TextInput
-            id="sid"
-            name="sid"
+            id='sid'
+            name='sid'
             value={formik.values.sid}
             onChange={formik.handleChange}
           />
           <p>이름</p>
           <TextInput
-            id="name"
-            name="name"
+            id='name'
+            name='name'
             value={formik.values.name}
             onChange={formik.handleChange}
           />
           <FileInput
-            type="file"
+            type='file'
             ref={fileInputRef}
             onChange={handleFileUpload}
           />
           <FileUploadButton
-            type="button"
+            type='button'
             onClick={() => fileInputRef.current.click()}
           >
             파일 업로드
           </FileUploadButton>
-          <SubmitButton type="submit">제출</SubmitButton>
+          <SubmitButton type='submit'>제출</SubmitButton>
         </Form>
       </Self>
       {openModal && (
