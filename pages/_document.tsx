@@ -9,7 +9,7 @@ class MyDocument extends Document {
           <meta property='og:type' content='website' />
           <meta
             property='og:image'
-            content='https://mju-likelion.com/og-image.png'
+            content='https://mju-likelion.com/images/og-image.png'
           />
           <meta property='og:url' content='https://mju-likelion.com/' />
           <meta
