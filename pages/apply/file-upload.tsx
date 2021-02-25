@@ -32,6 +32,7 @@ const TextInput = styled.input`
   background: #1a1b1c;
   padding: 8px 12px;
   border: 1px solid #333435;
+  outline: none;
 `;
 
 const FileInput = styled.input`
@@ -44,12 +45,14 @@ const FileUploadButton = styled.button`
   padding: 8px 12px;
   border: 1px solid #404042;
   margin: 16px 0;
+  outline: none;
 `;
 
 const SubmitButton = styled.button`
   background: #222324;
   color: #dbdbdb;
   padding: 8px 12px;
+  outline: none;
 
   &:hover {
     background: #ffffff;
