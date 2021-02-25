@@ -1,16 +1,17 @@
 import { css, Global } from '@emotion/react';
 
+import importFonts from 'lib/importFonts';
+
 function GlobalStyles() {
   return (
     <Global
       styles={css`
+        ${importFonts}
+
         html,
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
           background-color: #141517;
         }
 
