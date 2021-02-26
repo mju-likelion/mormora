@@ -66,9 +66,19 @@ const SubmitButton = styled.button`
   }
 `;
 
+const Link = styled.a`
+  color: #ff9e1b;
+  font-weight: 500;
+`;
+
 function FileUpload() {
-  const [openModal, setOpenModal] = useState(false);
+  const [modal, setModal] = useState<React.ReactNode>(null);
   const fileInputRef = useRef<HTMLInputElement>();
+
+  function handleModalClose() {
+    setModal(null);
+  }
+
   const formik = useFormik<Values>({
     initialValues: {
       sid: '',
@@ -125,9 +135,16 @@ function FileUpload() {
         },
         () => {
           // Upload completed successfully, now we can get the download URL
-          uploadTask.snapshot.ref.getDownloadURL().then(() => {
-            // 콜백함수로부터 downloadUrl을 받아서
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadUrl => {
             // console.log('File available at', downloadURL);
+            setModal(
+              <Portal>
+                <Modal onClose={handleModalClose}>
+                  업로드가 정상적으로 완료되었습니다. 파일은{' '}
+                  <Link href={downloadUrl}>여기</Link>에서 확인하실 수 있습니다.
+                </Modal>
+              </Portal>,
+            );
           });
         },
       );
@@ -139,7 +156,13 @@ function FileUpload() {
 
     if (file.size > 10 * 1024 * 1024) {
       // if filesize is larger than 10MB
-      setOpenModal(true);
+      setModal(
+        <Portal>
+          <Modal onClose={handleModalClose}>
+            10MB가 넘는 파일은 첨부할 수 없습니다.
+          </Modal>
+        </Portal>,
+      );
     } else if (file) {
       formik.setFieldValue('filename', file.name);
       formik.setFieldValue('fileContentType', file.type);
@@ -147,10 +170,6 @@ function FileUpload() {
     } else {
       // TODO: 파일이 없을 경우 Modal을 띄워야 함
     }
-  }
-
-  function handleModalClose() {
-    setOpenModal(false);
   }
 
   return (
@@ -190,13 +209,7 @@ function FileUpload() {
           <SubmitButton type='submit'>제출</SubmitButton>
         </Form>
       </Self>
-      {openModal && (
-        <Portal>
-          <Modal onClose={handleModalClose}>
-            10MB가 넘는 파일은 첨부할 수 없습니다.
-          </Modal>
-        </Portal>
-      )}
+      {modal}
     </>
   );
 }
