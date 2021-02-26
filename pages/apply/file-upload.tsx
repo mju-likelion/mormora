@@ -23,6 +23,11 @@ const Self = styled.div`
   height: 100vh;
 `;
 
+const Title = styled.h1`
+  font-size: 32px;
+  padding: 0 15px;
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -32,6 +37,7 @@ const TextInput = styled.input`
   background: #1a1b1c;
   padding: 8px 12px;
   border: 1px solid #333435;
+  width: 256px;
   outline: none;
 `;
 
@@ -150,11 +156,11 @@ function FileUpload() {
   return (
     <>
       <Self>
-        <h1>
+        <Title>
           멋쟁이 사자처럼 at 명지대(자연) 9기에 지원해주셔서 감사합니다.
           <br />
           3MB가 넘어가는 첨부파일은 이곳에 제출해주세요 🙂
-        </h1>
+        </Title>
         <Form onSubmit={formik.handleSubmit}>
           <p>학번</p>
           <TextInput
