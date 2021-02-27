@@ -45,12 +45,21 @@ const FileInput = styled.input`
   display: none;
 `;
 
+const FileName = styled.p`
+  width: 256px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 24px 0 0;
+`;
+
 const FileUploadButton = styled.button`
   color: #5d5e5f;
   background: none;
   padding: 8px 12px;
   border: 1px solid #404042;
   margin: 16px 0 0;
+  width: 256px;
   outline: none;
 `;
 
@@ -63,6 +72,7 @@ const SubmitButton = styled.button`
   background: #222324;
   color: #dbdbdb;
   padding: 8px 12px;
+  width: 256px;
   outline: none;
 
   &:hover {
@@ -205,6 +215,7 @@ function FileUpload() {
             ref={fileInputRef}
             onChange={handleFileUpload}
           />
+          {formik.values.file && <FileName>{formik.values.filename}</FileName>}
           <FileUploadButton
             type='button'
             onClick={() => fileInputRef.current.click()}
