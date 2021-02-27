@@ -50,8 +50,13 @@ const FileUploadButton = styled.button`
   background: none;
   padding: 8px 12px;
   border: 1px solid #404042;
-  margin: 16px 0;
+  margin: 16px 0 0;
   outline: none;
+`;
+
+const Divider = styled.div`
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  margin: 32px 0 16px;
 `;
 
 const SubmitButton = styled.button`
@@ -206,6 +211,7 @@ function FileUpload() {
           >
             파일 업로드
           </FileUploadButton>
+          <Divider />
           <SubmitButton type='submit'>제출</SubmitButton>
         </Form>
       </Self>
