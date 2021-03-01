@@ -37,6 +37,10 @@ const SectionSnsWrap = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: 40px;
+
+  @media screen and (max-width: 375px) {
+    margin-right: 0;
+  }
 `;
 
 const SectionSnsStyle = styled.div`
