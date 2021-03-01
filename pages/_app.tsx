@@ -3,6 +3,8 @@ import Head from 'next/head';
 
 import GlobalStyles from 'components/GlobalStyles';
 
+import Footer from '../components/common/Footer';
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -11,6 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <Component {...pageProps} />
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
