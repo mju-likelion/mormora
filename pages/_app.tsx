@@ -13,9 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <Component {...pageProps} />
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   );
 }

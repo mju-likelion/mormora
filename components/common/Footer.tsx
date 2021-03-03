@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
-const SectionWrap = styled.div`
+const SectionSelf = styled.footer`
   height: 62px;
   display: flex;
   padding: 22px 0;
@@ -43,7 +43,7 @@ const SectionSnsWrap = styled.div`
   }
 `;
 
-const SectionSnsStyle = styled.div`
+const SectionSnsBlock = styled.div`
   margin-right: 24px;
 `;
 
@@ -62,10 +62,10 @@ function Footer(): ReactElement {
   const years = date.getFullYear();
 
   return (
-    <SectionWrap>
+    <SectionSelf>
       <SectionMjuLogo>LIKE LION | MJU Nature © {years}</SectionMjuLogo>
       <SectionSnsWrap>
-        <SectionSnsStyle>
+        <SectionSnsBlock>
           <Link href='https://www.facebook.com/likelionatmju/'>
             <a>
               <SectionSns
@@ -74,8 +74,8 @@ function Footer(): ReactElement {
               />
             </a>
           </Link>
-        </SectionSnsStyle>
-        <SectionSnsStyle>
+        </SectionSnsBlock>
+        <SectionSnsBlock>
           <Link href='https://www.instagram.com/mju_likelion/'>
             <a>
               <SectionSns
@@ -86,8 +86,8 @@ function Footer(): ReactElement {
               />
             </a>
           </Link>
-        </SectionSnsStyle>
-        <SectionSnsStyle>
+        </SectionSnsBlock>
+        <SectionSnsBlock>
           <Link href='https://github.com/mju-likelion'>
             <a>
               <SectionSns
@@ -98,9 +98,9 @@ function Footer(): ReactElement {
               />
             </a>
           </Link>
-        </SectionSnsStyle>
+        </SectionSnsBlock>
       </SectionSnsWrap>
-    </SectionWrap>
+    </SectionSelf>
   );
 }
 export default Footer;
