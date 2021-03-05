@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ReactElement } from 'react';
 
 const SectionSelf = styled.footer`
+  background-color: #1e252c;
   height: 62px;
   display: flex;
   padding: 22px 0;
@@ -12,39 +13,64 @@ const SectionSelf = styled.footer`
 
   @media screen and (max-width: 768px) {
     max-width: 768px;
+    height: 100px;
+    padding: 23px 0;
+    display: block;
+    text-align: center;
   }
 
   @media screen and (max-width: 375px) {
-    padding: 25px 0;
+    padding: 69px 0;
     max-width: 375px;
-    font-size: 11px;
+    height: 200px;
+    font-size: 14px;
   }
 `;
 
 const SectionMjuLogo = styled.div`
   margin-left: 95px;
+  margin-right: auto;
 
   @media screen and (max-width: 768px) {
-    margin-left: 63px;
-  }
-
-  @media screen and (max-width: 375px) {
-    margin-left: 21px;
+    margin: auto;
   }
 `;
 
 const SectionSnsWrap = styled.div`
-  display: flex;
-  margin-left: auto;
-  margin-right: 40px;
+  display: inline-flex;
+
+  @media screen and (max-width: 768px) {
+    padding-top: 16px;
+  }
 
   @media screen and (max-width: 375px) {
-    margin-right: 0;
+    padding-top: 24px;
+  }
+`;
+
+const SectionSnsLine = styled.div`
+  margin-top: 8px;
+  width: 35px;
+  height: 2px;
+  color: #fff;
+  background-color: #fff;
+
+  @media screen and (max-width: 375px) {
+    margin-top: 10px;
+    width: 20px;
   }
 `;
 
 const SectionSnsBlock = styled.div`
   margin-right: 24px;
+`;
+
+const SectionSnsGit = styled.div`
+  margin-right: 165px;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+  }
 `;
 
 const SectionSns = styled.img`
@@ -76,6 +102,9 @@ function Footer(): ReactElement {
           </Link>
         </SectionSnsBlock>
         <SectionSnsBlock>
+          <SectionSnsLine />
+        </SectionSnsBlock>
+        <SectionSnsBlock>
           <Link href='https://www.instagram.com/mju_likelion/'>
             <a>
               <SectionSns
@@ -88,6 +117,9 @@ function Footer(): ReactElement {
           </Link>
         </SectionSnsBlock>
         <SectionSnsBlock>
+          <SectionSnsLine />
+        </SectionSnsBlock>
+        <SectionSnsGit>
           <Link href='https://github.com/mju-likelion'>
             <a>
               <SectionSns
@@ -98,7 +130,7 @@ function Footer(): ReactElement {
               />
             </a>
           </Link>
-        </SectionSnsBlock>
+        </SectionSnsGit>
       </SectionSnsWrap>
     </SectionSelf>
   );
