@@ -3,7 +3,11 @@
     "browser": true,
     "node": true
   },
-  "extends": ["airbnb-typescript", "airbnb/hooks", "prettier"],
+  "extends": [
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -13,14 +17,23 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "import"],
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
   "rules": {
     "import/no-anonymous-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",

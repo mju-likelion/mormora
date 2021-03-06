@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-
 import importFonts from 'lib/importFonts';
 
 function GlobalStyles() {
