@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
+import { useFormik } from 'formik';
+import { useRef, useState } from 'react';
+
 import Modal from 'components/Modal';
 import Portal from 'components/Portal';
-import { useFormik } from 'formik';
 import { storageService } from 'lib/firebase';
-import { useRef, useState } from 'react';
 
 interface Values {
   sid: string;

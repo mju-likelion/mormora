@@ -12,11 +12,13 @@
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@types/yup": "^0.29.11",
     "firebase": "^8.2.9",
     "formik": "^2.2.6",
     "next": "10.0.7",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",

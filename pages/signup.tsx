@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 // import Link from 'next/link';
+import { useFormik } from 'formik';
 import React from 'react';
+import * as Yup from 'yup';
 
 const BodyWrapper = styled.div`
   padding: 64px 0 62px;
@@ -38,7 +40,7 @@ const SignUpText = styled.div`
   letter-spacing: 0em;
 `;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +60,7 @@ const TextInput = styled.input`
   line-height: 22px;
   letter-spacing: -0.2px;
   border: 0px;
-  outline-color: #8FFCFF;
+  outline-color: #8ffcff;
   padding-left: 16px;
 `;
 
@@ -71,17 +73,17 @@ const GenderWrapper = styled.div`
   background-color: #28292a;
   margin-bottom: 24px;
   border: 0px;
-  outline-color: #8FFCFF;
+  /* outline-color: #8ffcff; */
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
   &:hover {
     cursor: pointer;
-    outline-color: #8FFCFF;
+    /* outline-color: #8ffcff; */
   }
 `;
 
-const GenderText = styled.div `
+const GenderText = styled.div`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
@@ -91,6 +93,30 @@ const GenderText = styled.div `
   color: #a0a0a0;
   margin-top: 11px;
 `;
+
+// const GenderSelect = styled.div`
+//   margin-top: 8px;
+//   width: 335px;
+//   height: 100px;
+//   border-radius: 6px;
+//   background-color: #28292a;
+// `;
+
+// const Female = styled.div`
+//   margin-top: 8px;
+//   height: 42px;
+//   &:hover {
+//     background-color: #454547;
+//   }
+// `;
+
+// const Male = styled.div`
+//   margin-bottom: 8px;
+//   height: 42px;
+//   &:hover {
+//     background-color: #454547;
+//   }
+// `;
 
 const SelectDown = styled.img`
   width: 16px;
@@ -98,7 +124,7 @@ const SelectDown = styled.img`
   margin-top: 18px;
 `;
 
-const ActivityWrapper = styled.div `
+const ActivityWrapper = styled.div`
   display: flex;
   flex-direction: row;
   display: flex;
@@ -106,14 +132,14 @@ const ActivityWrapper = styled.div `
   height: 44px;
   margin-bottom: 24px;
   border: 0px;
-  outline-color: #8FFCFF;
+  outline-color: #8ffcff;
   justify-content: space-between;
   &:hover {
     cursor: pointer;
   }
 `;
 
-const GenerationWrapper = styled.div `
+const GenerationWrapper = styled.div`
   display: flex;
   width: 162px;
   height: 44px;
@@ -122,13 +148,13 @@ const GenerationWrapper = styled.div `
   background-color: #28292a;
   margin-bottom: 24px;
   border: 0px;
-  outline-color: #8FFCFF;
+  outline-color: #8ffcff;
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
 `;
 
-const GenerationText = styled.div `
+const GenerationText = styled.div`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
@@ -139,7 +165,7 @@ const GenerationText = styled.div `
   margin-top: 11px;
 `;
 
-const PositionWrapper = styled.div `
+const PositionWrapper = styled.div`
   display: flex;
   width: 162px;
   height: 44px;
@@ -148,13 +174,13 @@ const PositionWrapper = styled.div `
   background-color: #28292a;
   margin-bottom: 24px;
   border: 0px;
-  outline-color: #8FFCFF;
+  outline-color: #8ffcff;
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
 `;
 
-const PositionText = styled.div `
+const PositionText = styled.div`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
@@ -163,16 +189,29 @@ const PositionText = styled.div `
   letter-spacing: -0.2px;
   color: #a0a0a0;
   margin-top: 11px;
+`;
+
+const ActivityText = styled.div`
+  height: 22px;
+  left: 552px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  color: #0087d1;
+  margin-bottom: 24px;
 `;
 
 const AgreeCheckWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 76px;
+  margin-top: 8px;
   justify-content: center;
 `;
 
-const AgreeCheckBox = styled.div`
+const AgreeCheckBox = styled.input`
   width: 16px;
   height: 16px;
   background-color: #ffffff;
@@ -185,6 +224,7 @@ const AgreeCheckText = styled.div`
   width: 140px;
   height: 20px;
   margin-left: 8px;
+  margin-top: 2px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -197,7 +237,7 @@ const AgreeCheckText = styled.div`
   }
 `;
 
-const SignUpButtonWrapper = styled.button `
+const SignUpButtonWrapper = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -210,7 +250,7 @@ const SignUpButtonWrapper = styled.button `
   outline: none;
 `;
 
-const SignUpButton = styled.div `
+const SignUpButton = styled.div`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: bold;
@@ -218,14 +258,94 @@ const SignUpButton = styled.div `
   line-height: 22px;
   text-align: center;
   letter-spacing: -0.1px;
-  color: #FFFFFF;
+  color: #ffffff;
 `;
 
+const Error = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+`;
 
+const ErrorFinal = styled.div`
+  display: flex;
+  margin-top: 24px;
+  align-items: center;
+`;
+
+const Option = styled.img`
+  width: 16px;
+  height: 16px;
+  color: #ffcf53;
+`;
+
+const ErrorText = styled.div`
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  color: #ffcf53;
+  margin-left: 4px;
+`;
+
+interface Values {
+  name: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  major: string;
+  studentId: string;
+  gender: string;
+  generation: string;
+  position: string;
+  github: string;
+  agreeCheck: boolean;
+}
 
 function SignUp() {
-
-
+  const formik = useFormik<Values>({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      phoneNumber: '',
+      major: '',
+      studentId: '',
+      gender: '',
+      generation: '',
+      position: '',
+      github: '',
+      agreeCheck: true,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(2, '2글자 이상 4글자 이하로 입력해주세요')
+        .max(4, '2글자 이상 4글자 이하로 입력해주세요')
+        .required('이름을 입력해주세요.'),
+      email: Yup.string()
+        .email('이메일 형식에 맞지 않습니다.')
+        .required('이메일을 입력해주세요.'),
+      password: Yup.string()
+        .min(8, '최소 8글자 이상 입력해주세요.')
+        .required('비밀번호를 입력해주세요.'),
+      phoneNumber: Yup.string()
+        .matches(/\b\d{11,11}\b/, '숫자만 입력해주세요.')
+        .required('휴대폰 번호를 입력해주세요'),
+      major: Yup.string().required('전공을 입력해주세요.'),
+      studentId: Yup.string()
+        .matches(/\b\d{8,8}\b/, '올바른 학번을 입력해주세요.')
+        .required('학번을 입력해주세요.'),
+      gender: Yup.string().required('성별을 선택해주세요.'),
+      generation: Yup.string().required('기수를 선택해주세요.'),
+      position: Yup.string().required('직책을 선택해주세요.'),
+      agreeCheck: Yup.boolean().oneOf(
+        [true],
+        '회원가입을 위해 약관에 동의해주세요.',
+      ),
+    }),
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
 
   return (
     <>
@@ -234,89 +354,173 @@ function SignUp() {
           Logo <br /> Placehorder
         </Logo>
         <SignUpText>회원가입</SignUpText>
-        <FormWrapper>
+        <FormWrapper onSubmit={formik.handleSubmit}>
           <TextInput
             id='name'
             name='name'
-            placeholder="Name"
-            autoComplete="off"
-            // onChange={onChange}
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Name'
+            autoComplete='off'
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.name && formik.errors.name && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.name}</ErrorText>
+            </Error>
+          )}
+
           <TextInput
             id='email'
             name='email'
-            placeholder="Email"
-            autoComplete="off"
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Email'
+            autoComplete='off'
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.email && formik.errors.email && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.email}</ErrorText>
+            </Error>
+          )}
+
           <TextInput
             id='password'
             name='password'
-            placeholder="Password"
-            autoComplete="off"
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Password'
+            autoComplete='off'
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.password && formik.errors.password && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.password}</ErrorText>
+            </Error>
+          )}
+
           <TextInput
             id='phoneNumber'
             name='phoneNumber'
-            placeholder="Phone Number"
-            autoComplete="off"
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Phone Number'
+            autoComplete='off'
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.phoneNumber}</ErrorText>
+            </Error>
+          )}
+
           <TextInput
             id='major'
             name='major'
-            placeholder="Major"
-            autoComplete="off"
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Major'
+            autoComplete='off'
+            value={formik.values.major}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.major && formik.errors.major && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.major}</ErrorText>
+            </Error>
+          )}
+
           <TextInput
             id='studentId'
             name='studentId'
-            placeholder="Student Id"
-            autoComplete="off"
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
+            placeholder='Student Id'
+            autoComplete='off'
+            value={formik.values.studentId}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          
+          {formik.touched.studentId && formik.errors.studentId && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.studentId}</ErrorText>
+            </Error>
+          )}
+
           <GenderWrapper>
             <GenderText>Gender</GenderText>
-            <SelectDown  src="/images/selectDown.svg"/>
+            <SelectDown src='/images/selectDown.svg' />
           </GenderWrapper>
-        
+          {formik.touched.gender && formik.errors.gender && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.gender}</ErrorText>
+            </Error>
+          )}
+
           <ActivityWrapper>
             <GenerationWrapper>
               <GenerationText>Generation</GenerationText>
-              <SelectDown  src="/images/selectDown.svg"/>
+              <SelectDown src='/images/selectDown.svg' />
             </GenerationWrapper>
             <PositionWrapper>
               <PositionText>Position</PositionText>
-              <SelectDown  src="/images/selectDown.svg"/>
+              <SelectDown src='/images/selectDown.svg' />
             </PositionWrapper>
           </ActivityWrapper>
+
+          <ActivityText>
+            기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
+          </ActivityText>
+
+          {formik.touched.generation && formik.errors.generation && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.generation}</ErrorText>
+            </Error>
+          )}
+
+          {formik.touched.position && formik.errors.position && (
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.position}</ErrorText>
+            </Error>
+          )}
 
           <TextInput
             id='github'
             name='github'
-            placeholder="Github"
-            autoComplete="off"
+            placeholder='Github'
+            autoComplete='off'
             // value={formik.values.name}
             // onChange={formik.handleChange}
           />
         </FormWrapper>
+
         <AgreeCheckWrapper>
-          <AgreeCheckBox />
+          <AgreeCheckBox
+            type='checkbox'
+            name='agreeCheck'
+            value='agreeCheck'
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
           {/* <Link href="/#"> */}
           <AgreeCheckText>이용약관에 동의 (필수)</AgreeCheckText>
           {/* </Link> */}
         </AgreeCheckWrapper>
-        <SignUpButtonWrapper>
+        {formik.touched.agreeCheck && formik.errors.agreeCheck && (
+          <ErrorFinal>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.agreeCheck}</ErrorText>
+          </ErrorFinal>
+        )}
+
+        <SignUpButtonWrapper type='submit'>
           <SignUpButton>회원가입</SignUpButton>
         </SignUpButtonWrapper>
       </BodyWrapper>
