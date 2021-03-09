@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import Link from 'next/link';
+
+import icModalClose from 'images/modal/icModalClose.svg';
 // import * as Yup from 'yup';
 
 interface SignInModalProps {
@@ -22,6 +24,7 @@ const ModalFullScreen = styled.div`
 
 const ModalBlock = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   border-radius: 6px;
   padding: 48px 0 63px;
@@ -32,6 +35,16 @@ const ModalBlock = styled.div`
     width: auto;
     height: 100%;
   }
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  background: url(${icModalClose}) 0 center no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 `;
 
 const Form = styled.form`
@@ -111,6 +124,7 @@ function SignInModal({ onClose }: SignInModalProps) {
   return (
     <ModalFullScreen>
       <ModalBlock>
+        <CloseButton onClick={onClose} />
         <Form>
           <Title>로그인</Title>
           <Input
