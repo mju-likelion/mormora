@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 // import Link from 'next/link';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 const BodyWrapper = styled.div`
@@ -48,7 +48,7 @@ const FormWrapper = styled.form`
 `;
 
 const TextInput = styled.input`
-  width: 335px;
+  width: 336px;
   height: 44px;
   border-radius: 6px;
   background-color: #28292a;
@@ -66,20 +66,20 @@ const TextInput = styled.input`
 
 const GenderWrapper = styled.div`
   display: flex;
-  width: 335px;
+  position: relative;
+  width: 336px;
   height: 44px;
   border-radius: 6px;
   padding-left: 16px;
   background-color: #28292a;
   margin-bottom: 24px;
   border: 0px;
-  /* outline-color: #8ffcff; */
+  outline-color: #8ffcff;
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
   &:hover {
     cursor: pointer;
-    /* outline-color: #8ffcff; */
   }
 `;
 
@@ -90,33 +90,9 @@ const GenderText = styled.div`
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
-  color: #a0a0a0;
+  color: #757575;
   margin-top: 11px;
 `;
-
-// const GenderSelect = styled.div`
-//   margin-top: 8px;
-//   width: 335px;
-//   height: 100px;
-//   border-radius: 6px;
-//   background-color: #28292a;
-// `;
-
-// const Female = styled.div`
-//   margin-top: 8px;
-//   height: 42px;
-//   &:hover {
-//     background-color: #454547;
-//   }
-// `;
-
-// const Male = styled.div`
-//   margin-bottom: 8px;
-//   height: 42px;
-//   &:hover {
-//     background-color: #454547;
-//   }
-// `;
 
 const SelectDown = styled.img`
   width: 16px;
@@ -128,9 +104,7 @@ const ActivityWrapper = styled.div`
   display: flex;
   flex-direction: row;
   display: flex;
-  width: 335px;
-  height: 44px;
-  margin-bottom: 24px;
+  width: 336px;
   border: 0px;
   outline-color: #8ffcff;
   justify-content: space-between;
@@ -139,8 +113,14 @@ const ActivityWrapper = styled.div`
   }
 `;
 
+const ActivitySelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const GenerationWrapper = styled.div`
   display: flex;
+  /* position: relative; */
   width: 162px;
   height: 44px;
   border-radius: 6px;
@@ -161,12 +141,13 @@ const GenerationText = styled.div`
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
-  color: #a0a0a0;
+  color: #757575;
   margin-top: 11px;
 `;
 
 const PositionWrapper = styled.div`
   display: flex;
+  /* position: relative; */
   width: 162px;
   height: 44px;
   border-radius: 6px;
@@ -187,7 +168,7 @@ const PositionText = styled.div`
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
-  color: #a0a0a0;
+  color: #757575;
   margin-top: 11px;
 `;
 
@@ -215,9 +196,6 @@ const AgreeCheckBox = styled.input`
   width: 16px;
   height: 16px;
   background-color: #ffffff;
-  &:active {
-    background-color: #0087d1;
-  }
 `;
 
 const AgreeCheckText = styled.div`
@@ -241,13 +219,16 @@ const SignUpButtonWrapper = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #a0a0a0;
-  margin-top: 70px;
-  width: 335px;
+  background-color: #0087d1;
+  margin-top: 24px;
+  width: 336px;
   height: 44px;
   border-radius: 6px;
   padding: 11px;
   outline: none;
+  &:disabled {
+    background-color: #a0a0a0;
+  }
 `;
 
 const SignUpButton = styled.div`
@@ -285,6 +266,70 @@ const ErrorText = styled.div`
   letter-spacing: -0.2px;
   color: #ffcf53;
   margin-left: 4px;
+`;
+
+const GenderListWrapper = styled.div`
+  width: 336px;
+  position: absolute;
+  top: 753px;
+  display: flex;
+  flex-direction: column;
+  background-color: #28292a;
+  border-radius: 6px;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const GenderList = styled.ul`
+  width: 336px;
+  padding: 0;
+  background-color: #28292a;
+  list-style: none;
+  text-align: center;
+  margin: 8px 0;
+`;
+
+const GenderItem = styled.li`
+  height: 42px;
+  background-color: #28292a;
+  &:hover {
+    background-color: #a0a0a0;
+  }
+  color: #757575;
+  font-size: 14px;
+  padding-top: 13px;
+`;
+
+const ActivityListWrapper = styled.div`
+  width: 162px;
+  position: absolute;
+  top: 821px;
+  display: flex;
+  flex-direction: column;
+  background-color: #28292a;
+  border-radius: 6px;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const ActivityList = styled.ul`
+  width: 162px;
+  padding: 0;
+  background-color: #28292a;
+  list-style: none;
+  text-align: center;
+  margin: 8px 0;
+`;
+
+const ActivityItem = styled.li`
+  height: 42px;
+  background-color: #28292a;
+  &:hover {
+    background-color: #a0a0a0;
+  }
+  color: #757575;
+  font-size: 14px;
+  padding-top: 13px;
 `;
 
 interface Values {
@@ -342,10 +387,37 @@ function SignUp() {
         '회원가입을 위해 약관에 동의해주세요.',
       ),
     }),
-    onSubmit: values => {
-      console.log(values);
-    },
+    onSubmit: () => {},
   });
+
+  const GenderOptions = ['여성', '남성'];
+  const GenerationOptions = ['7기', '8기', '9기'];
+  const PositionOptions = ['대표', '부대표', '운영진', '아기사자'];
+
+  const [isGenderOpen, setIsGenderOpen] = useState(false);
+  const [isGenerationOpen, setIsGenerationOpen] = useState(false);
+  const [isPositionOpen, setIsPositionOpen] = useState(false);
+
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedGeneration, setSelectedGeneration] = useState(null);
+  const [selectedPosition, setSelectedPosition] = useState(null);
+
+  const togglingGender = () => setIsGenderOpen(!isGenderOpen);
+  const togglingGeneration = () => setIsGenerationOpen(!isGenerationOpen);
+  const togglingPosition = () => setIsPositionOpen(!isPositionOpen);
+
+  const onGenderOptionClicked = value => () => {
+    setSelectedGender(value);
+    setIsGenderOpen(false);
+  };
+  const onGenerationOptionClicked = value => () => {
+    setSelectedGeneration(value);
+    setIsGenerationOpen(false);
+  };
+  const onPositionOptionClicked = value => () => {
+    setSelectedPosition(value);
+    setIsPositionOpen(false);
+  };
 
   return (
     <>
@@ -354,7 +426,7 @@ function SignUp() {
           Logo <br /> Placehorder
         </Logo>
         <SignUpText>회원가입</SignUpText>
-        <FormWrapper onSubmit={formik.handleSubmit}>
+        <FormWrapper name='form' onSubmit={formik.handleSubmit}>
           <TextInput
             id='name'
             name='name'
@@ -390,6 +462,7 @@ function SignUp() {
           <TextInput
             id='password'
             name='password'
+            type='password'
             placeholder='Password'
             autoComplete='off'
             value={formik.values.password}
@@ -450,11 +523,24 @@ function SignUp() {
               <ErrorText>{formik.errors.studentId}</ErrorText>
             </Error>
           )}
-
-          <GenderWrapper>
-            <GenderText>Gender</GenderText>
+          <GenderWrapper onClick={togglingGender}>
+            <GenderText>{selectedGender || 'Gender'}</GenderText>
             <SelectDown src='/images/selectDown.svg' />
           </GenderWrapper>
+          {isGenderOpen && (
+            <GenderListWrapper>
+              <GenderList>
+                {GenderOptions.map(option => (
+                  <GenderItem
+                    onClick={onGenderOptionClicked(option)}
+                    key={Math.random()}
+                  >
+                    {option}
+                  </GenderItem>
+                ))}
+              </GenderList>
+            </GenderListWrapper>
+          )}
           {formik.touched.gender && formik.errors.gender && (
             <Error>
               <Option src='/images/option.svg' />
@@ -463,16 +549,50 @@ function SignUp() {
           )}
 
           <ActivityWrapper>
-            <GenerationWrapper>
-              <GenerationText>Generation</GenerationText>
-              <SelectDown src='/images/selectDown.svg' />
-            </GenerationWrapper>
-            <PositionWrapper>
-              <PositionText>Position</PositionText>
-              <SelectDown src='/images/selectDown.svg' />
-            </PositionWrapper>
-          </ActivityWrapper>
+            <ActivitySelectWrapper>
+              <GenerationWrapper onClick={togglingGeneration}>
+                <GenerationText>
+                  {selectedGeneration || 'Generation'}
+                </GenerationText>
+                <SelectDown src='/images/selectDown.svg' />
+              </GenerationWrapper>
+              {isGenerationOpen && (
+                <ActivityListWrapper>
+                  <ActivityList>
+                    {GenerationOptions.map(option => (
+                      <ActivityItem
+                        onClick={onGenerationOptionClicked(option)}
+                        key={Math.random()}
+                      >
+                        {option}
+                      </ActivityItem>
+                    ))}
+                  </ActivityList>
+                </ActivityListWrapper>
+              )}
+            </ActivitySelectWrapper>
 
+            <ActivitySelectWrapper>
+              <PositionWrapper onClick={togglingPosition}>
+                <PositionText>{selectedPosition || 'Position'}</PositionText>
+                <SelectDown src='/images/selectDown.svg' />
+              </PositionWrapper>
+              {isPositionOpen && (
+                <ActivityListWrapper>
+                  <ActivityList>
+                    {PositionOptions.map(option => (
+                      <ActivityItem
+                        onClick={onPositionOptionClicked(option)}
+                        key={Math.random()}
+                      >
+                        {option}
+                      </ActivityItem>
+                    ))}
+                  </ActivityList>
+                </ActivityListWrapper>
+              )}
+            </ActivitySelectWrapper>
+          </ActivityWrapper>
           <ActivityText>
             기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
           </ActivityText>
@@ -496,8 +616,6 @@ function SignUp() {
             name='github'
             placeholder='Github'
             autoComplete='off'
-            // value={formik.values.name}
-            // onChange={formik.handleChange}
           />
         </FormWrapper>
 
@@ -509,6 +627,7 @@ function SignUp() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
+
           {/* <Link href="/#"> */}
           <AgreeCheckText>이용약관에 동의 (필수)</AgreeCheckText>
           {/* </Link> */}
@@ -519,8 +638,7 @@ function SignUp() {
             <ErrorText>{formik.errors.agreeCheck}</ErrorText>
           </ErrorFinal>
         )}
-
-        <SignUpButtonWrapper type='submit'>
+        <SignUpButtonWrapper type='submit' disabled={!!formik.errors}>
           <SignUpButton>회원가입</SignUpButton>
         </SignUpButtonWrapper>
       </BodyWrapper>
