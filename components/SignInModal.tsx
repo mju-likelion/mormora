@@ -73,6 +73,11 @@ const Input = styled.input`
   padding: 11px 12px;
   font-size: 17px;
   font-weight: 22px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid ${props => props.theme.colors.outline};
+  }
 `;
 
 const LogInButton = styled.button`
@@ -131,13 +136,16 @@ function SignInModal({ onClose }: SignInModalProps) {
             id='email'
             name='email'
             placeholder='Email'
+            autoComplete='off'
             onChange={formik.handleChange}
             value={formik.values.email}
           />
           <Input
             id='password'
             name='password'
+            type='password'
             placeholder='Password'
+            autoComplete='off'
             onChange={formik.handleChange}
             value={formik.values.password}
           />
