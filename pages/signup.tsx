@@ -10,6 +10,7 @@ const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 const Logo = styled.div`
@@ -62,11 +63,18 @@ const TextInput = styled.input`
   border: 0px;
   outline-color: #8ffcff;
   padding-left: 16px;
+  color: #757575;
+`;
+
+const GenderSelectboxWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
 `;
 
 const GenderWrapper = styled.div`
   display: flex;
-  position: relative;
   width: 336px;
   height: 44px;
   border-radius: 6px;
@@ -100,6 +108,38 @@ const SelectDown = styled.img`
   margin-top: 18px;
 `;
 
+const GenderListWrapper = styled.div`
+  width: 336px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: #28292a;
+  border-radius: 6px;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const GenderList = styled.ul`
+  width: 336px;
+  padding: 0;
+  background-color: #28292a;
+  list-style: none;
+  text-align: center;
+  margin: 8px 0;
+`;
+
+const GenderItem = styled.li`
+  height: 42px;
+  background-color: #28292a;
+  &:hover {
+    background-color: #a0a0a0;
+  }
+  color: #757575;
+  font-size: 14px;
+  padding-top: 13px;
+`;
+
 const ActivityWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -113,14 +153,14 @@ const ActivityWrapper = styled.div`
   }
 `;
 
-const ActivitySelectWrapper = styled.div`
+const ActivitySelectBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const GenerationWrapper = styled.div`
   display: flex;
-  /* position: relative; */
   width: 162px;
   height: 44px;
   border-radius: 6px;
@@ -147,7 +187,6 @@ const GenerationText = styled.div`
 
 const PositionWrapper = styled.div`
   display: flex;
-  /* position: relative; */
   width: 162px;
   height: 44px;
   border-radius: 6px;
@@ -170,6 +209,38 @@ const PositionText = styled.div`
   letter-spacing: -0.2px;
   color: #757575;
   margin-top: 11px;
+`;
+
+const ActivityListWrapper = styled.div`
+  width: 162px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: #28292a;
+  border-radius: 6px;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const ActivityList = styled.ul`
+  width: 162px;
+  padding: 0;
+  background-color: #28292a;
+  list-style: none;
+  text-align: center;
+  margin: 8px 0;
+`;
+
+const ActivityItem = styled.li`
+  height: 42px;
+  background-color: #28292a;
+  &:hover {
+    background-color: #a0a0a0;
+  }
+  color: #757575;
+  font-size: 14px;
+  padding-top: 13px;
 `;
 
 const ActivityText = styled.div`
@@ -266,70 +337,6 @@ const ErrorText = styled.div`
   letter-spacing: -0.2px;
   color: #ffcf53;
   margin-left: 4px;
-`;
-
-const GenderListWrapper = styled.div`
-  width: 336px;
-  position: absolute;
-  top: 753px;
-  display: flex;
-  flex-direction: column;
-  background-color: #28292a;
-  border-radius: 6px;
-  justify-content: center;
-  margin-bottom: 24px;
-`;
-
-const GenderList = styled.ul`
-  width: 336px;
-  padding: 0;
-  background-color: #28292a;
-  list-style: none;
-  text-align: center;
-  margin: 8px 0;
-`;
-
-const GenderItem = styled.li`
-  height: 42px;
-  background-color: #28292a;
-  &:hover {
-    background-color: #a0a0a0;
-  }
-  color: #757575;
-  font-size: 14px;
-  padding-top: 13px;
-`;
-
-const ActivityListWrapper = styled.div`
-  width: 162px;
-  position: absolute;
-  top: 821px;
-  display: flex;
-  flex-direction: column;
-  background-color: #28292a;
-  border-radius: 6px;
-  justify-content: center;
-  margin-bottom: 24px;
-`;
-
-const ActivityList = styled.ul`
-  width: 162px;
-  padding: 0;
-  background-color: #28292a;
-  list-style: none;
-  text-align: center;
-  margin: 8px 0;
-`;
-
-const ActivityItem = styled.li`
-  height: 42px;
-  background-color: #28292a;
-  &:hover {
-    background-color: #a0a0a0;
-  }
-  color: #757575;
-  font-size: 14px;
-  padding-top: 13px;
 `;
 
 interface Values {
@@ -523,24 +530,27 @@ function SignUp() {
               <ErrorText>{formik.errors.studentId}</ErrorText>
             </Error>
           )}
-          <GenderWrapper onClick={togglingGender}>
-            <GenderText>{selectedGender || 'Gender'}</GenderText>
-            <SelectDown src='/images/selectDown.svg' />
-          </GenderWrapper>
-          {isGenderOpen && (
-            <GenderListWrapper>
-              <GenderList>
-                {GenderOptions.map(option => (
-                  <GenderItem
-                    onClick={onGenderOptionClicked(option)}
-                    key={Math.random()}
-                  >
-                    {option}
-                  </GenderItem>
-                ))}
-              </GenderList>
-            </GenderListWrapper>
-          )}
+          <GenderSelectboxWrapper>
+            <GenderWrapper onClick={togglingGender}>
+              <GenderText>{selectedGender || 'Gender'}</GenderText>
+              <SelectDown src='/images/selectDown.svg' />
+            </GenderWrapper>
+            {isGenderOpen && (
+              <GenderListWrapper>
+                <GenderList>
+                  {GenderOptions.map(option => (
+                    <GenderItem
+                      onClick={onGenderOptionClicked(option)}
+                      key={Math.random()}
+                    >
+                      {option}
+                    </GenderItem>
+                  ))}
+                </GenderList>
+              </GenderListWrapper>
+            )}
+          </GenderSelectboxWrapper>
+
           {formik.touched.gender && formik.errors.gender && (
             <Error>
               <Option src='/images/option.svg' />
@@ -549,7 +559,7 @@ function SignUp() {
           )}
 
           <ActivityWrapper>
-            <ActivitySelectWrapper>
+            <ActivitySelectBoxWrapper>
               <GenerationWrapper onClick={togglingGeneration}>
                 <GenerationText>
                   {selectedGeneration || 'Generation'}
@@ -570,9 +580,9 @@ function SignUp() {
                   </ActivityList>
                 </ActivityListWrapper>
               )}
-            </ActivitySelectWrapper>
+            </ActivitySelectBoxWrapper>
 
-            <ActivitySelectWrapper>
+            <ActivitySelectBoxWrapper>
               <PositionWrapper onClick={togglingPosition}>
                 <PositionText>{selectedPosition || 'Position'}</PositionText>
                 <SelectDown src='/images/selectDown.svg' />
@@ -591,7 +601,7 @@ function SignUp() {
                   </ActivityList>
                 </ActivityListWrapper>
               )}
-            </ActivitySelectWrapper>
+            </ActivitySelectBoxWrapper>
           </ActivityWrapper>
           <ActivityText>
             기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
