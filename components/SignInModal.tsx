@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import Link from 'next/link';
+import { FocusEventHandler, useState } from 'react';
+import * as Yup from 'yup';
 
 import icModalClose from 'images/modal/icModalClose.svg';
-// import * as Yup from 'yup';
+import icWarning from 'images/modal/icWarning.svg';
 
 interface SignInModalProps {
   onClose: () => void;
@@ -69,7 +71,7 @@ const Input = styled.input`
   background: #3a3b3d;
   border-radius: 6px;
   border: none;
-  margin: 8px 0 0;
+  margin: 11px 0 0;
   padding: 11px 12px;
   font-size: 17px;
   font-weight: 22px;
@@ -78,6 +80,16 @@ const Input = styled.input`
     outline: none;
     border: 1px solid ${props => props.theme.colors.outline};
   }
+`;
+
+const Warning = styled.p`
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  color: ${props => props.theme.colors.orangeL1};
+  background: url(${icWarning}) left no-repeat;
+  margin: 8px 0 0;
+  padding: 0 0 0 20px;
 `;
 
 const LogInButton = styled.button`
@@ -94,6 +106,11 @@ const LogInButton = styled.button`
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
+
+  &:disabled {
+    background-color: ${props => props.theme.colors.whiteD1};
+    cursor: not-allowed;
+  }
 `;
 
 const AdditionalDesc = styled.div`
@@ -112,19 +129,35 @@ const Paragraph = styled.p`
 `;
 
 function SignInModal({ onClose }: SignInModalProps) {
+  const [focus, setFocus] = useState({
+    email: false,
+    password: false,
+  });
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    // validationSchema: Yup.object({
-    //   email: Yup.string().email().required('이메일을 입력해주세요.'),
-    //   password: Yup.string()
-    //     .min(8, '비밀번호는 최소 8글자 이상 입력해주세요.')
-    //     .required('비밀번호를 입력해주세요.'),
-    // }),
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('이메일 형식에 맞지 않습니다.')
+        .required('이메일을 입력해주세요.'),
+      password: Yup.string()
+        .min(8, '비밀번호는 최소 8글자 이상 입력해주세요.')
+        .required('비밀번호를 입력해주세요.'),
+    }),
     onSubmit: () => {},
   });
+
+  const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
+    setFocus({ ...focus, [e.target.name]: true });
+  };
+
+  const handleBlur: FocusEventHandler<HTMLInputElement> = e => {
+    formik.handleBlur(e);
+    setFocus({ ...focus, [e.target.name]: false });
+  };
 
   return (
     <ModalFullScreen>
@@ -138,8 +171,13 @@ function SignInModal({ onClose }: SignInModalProps) {
             placeholder='Email'
             autoComplete='off'
             onChange={formik.handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             value={formik.values.email}
           />
+          {formik.touched.email && formik.errors.email && !focus.email && (
+            <Warning>{formik.errors.email}</Warning>
+          )}
           <Input
             id='password'
             name='password'
@@ -147,9 +185,18 @@ function SignInModal({ onClose }: SignInModalProps) {
             placeholder='Password'
             autoComplete='off'
             onChange={formik.handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             value={formik.values.password}
           />
-          <LogInButton>로그인</LogInButton>
+          {formik.touched.password &&
+            formik.errors.password &&
+            !focus.password && <Warning>{formik.errors.password}</Warning>}
+          <LogInButton
+            disabled={!!formik.errors.email || !!formik.errors.password}
+          >
+            로그인
+          </LogInButton>
         </Form>
         <AdditionalDesc>
           <Paragraph>
