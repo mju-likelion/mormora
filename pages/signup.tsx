@@ -429,7 +429,7 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.name && formik.errors.name && (
+          {formik.touched.name && formik.errors.name && !focus.name && (
             <Error>
               <Option src='/images/option.svg' />
               <ErrorText>{formik.errors.name}</ErrorText>
@@ -446,7 +446,7 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.email && formik.errors.email && (
+          {formik.touched.email && formik.errors.email && !focus.email && (
             <Error>
               <Option src='/images/option.svg' />
               <ErrorText>{formik.errors.email}</ErrorText>
@@ -464,12 +464,14 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.password && formik.errors.password && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.password}</ErrorText>
-            </Error>
-          )}
+          {formik.touched.password &&
+            formik.errors.password &&
+            !focus.password && (
+              <Error>
+                <Option src='/images/option.svg' />
+                <ErrorText>{formik.errors.password}</ErrorText>
+              </Error>
+            )}
 
           <TextInput
             id='phoneNumber'
@@ -481,12 +483,14 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.phoneNumber}</ErrorText>
-            </Error>
-          )}
+          {formik.touched.phoneNumber &&
+            formik.errors.phoneNumber &&
+            !focus.phoneNumber && (
+              <Error>
+                <Option src='/images/option.svg' />
+                <ErrorText>{formik.errors.phoneNumber}</ErrorText>
+              </Error>
+            )}
 
           <TextInput
             id='major'
@@ -498,7 +502,7 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.major && formik.errors.major && (
+          {formik.touched.major && formik.errors.major && !focus.major && (
             <Error>
               <Option src='/images/option.svg' />
               <ErrorText>{formik.errors.major}</ErrorText>
@@ -515,12 +519,14 @@ function SignUp() {
             onBlur={handleBlur}
             onFocus={handleFocus}
           />
-          {formik.touched.studentId && formik.errors.studentId && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.studentId}</ErrorText>
-            </Error>
-          )}
+          {formik.touched.studentId &&
+            formik.errors.studentId &&
+            !focus.studentId && (
+              <Error>
+                <Option src='/images/option.svg' />
+                <ErrorText>{formik.errors.studentId}</ErrorText>
+              </Error>
+            )}
           <GenderSelectboxWrapper>
             <GenderWrapper onClick={togglingGender}>
               <GenderText>{selectedGender || 'Gender'}</GenderText>
@@ -542,7 +548,7 @@ function SignUp() {
             )}
           </GenderSelectboxWrapper>
 
-          {formik.touched.gender && formik.errors.gender && (
+          {formik.touched.gender && formik.errors.gender && !focus.gender && (
             <Error>
               <Option src='/images/option.svg' />
               <ErrorText>{formik.errors.gender}</ErrorText>
@@ -598,19 +604,23 @@ function SignUp() {
             기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
           </ActivityText>
 
-          {formik.touched.generation && formik.errors.generation && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.generation}</ErrorText>
-            </Error>
-          )}
+          {formik.touched.generation &&
+            formik.errors.generation &&
+            !focus.generation && (
+              <Error>
+                <Option src='/images/option.svg' />
+                <ErrorText>{formik.errors.generation}</ErrorText>
+              </Error>
+            )}
 
-          {formik.touched.position && formik.errors.position && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.position}</ErrorText>
-            </Error>
-          )}
+          {formik.touched.position &&
+            formik.errors.position &&
+            !focus.position && (
+              <Error>
+                <Option src='/images/option.svg' />
+                <ErrorText>{formik.errors.position}</ErrorText>
+              </Error>
+            )}
 
           <TextInput
             id='github'
@@ -634,12 +644,14 @@ function SignUp() {
           <AgreeCheckText>이용약관에 동의 (필수)</AgreeCheckText>
           {/* </Link> */}
         </AgreeCheckWrapper>
-        {formik.touched.agreeCheck && formik.errors.agreeCheck && (
-          <ErrorFinal>
-            <Option src='/images/option.svg' />
-            <ErrorText>{formik.errors.agreeCheck}</ErrorText>
-          </ErrorFinal>
-        )}
+        {formik.touched.agreeCheck &&
+          formik.errors.agreeCheck &&
+          !focus.agreeCheck && (
+            <ErrorFinal>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.agreeCheck}</ErrorText>
+            </ErrorFinal>
+          )}
         <SignUpButtonWrapper
           type='submit'
           disabled={
