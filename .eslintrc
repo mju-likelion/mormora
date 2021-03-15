@@ -57,6 +57,7 @@
   "settings": {
     "import/resolver": {
       "typescript": {}
-    }
+    },
+    "insert_final_newline" : true
   }
 }

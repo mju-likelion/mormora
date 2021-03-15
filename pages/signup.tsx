@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 // import Link from 'next/link';
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useState, FocusEventHandler } from 'react';
 import * as Yup from 'yup';
 
 const BodyWrapper = styled.div`
@@ -15,16 +15,10 @@ const BodyWrapper = styled.div`
 
 const Logo = styled.div`
   margin-top: 83px;
-  text-align: center;
+  /* text-align: center;
   width: 124px;
-  height: 48px;
-  font-family: Roboto;
+  height: 48px; */
   font-size: 24px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: center;
   color: rgba(255, 255, 255, 0.25);
 `;
 
@@ -33,12 +27,7 @@ const SignUpText = styled.div`
   width: 72px;
   height: 22px;
   text-align: center;
-  font-family: Noto Sans KR;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0em;
 `;
 
 const FormWrapper = styled.form`
@@ -54,9 +43,6 @@ const TextInput = styled.input`
   border-radius: 6px;
   background-color: #28292a;
   margin-bottom: 24px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
@@ -86,15 +72,10 @@ const GenderWrapper = styled.div`
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const GenderText = styled.div`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
@@ -148,9 +129,7 @@ const ActivityWrapper = styled.div`
   border: 0px;
   outline-color: #8ffcff;
   justify-content: space-between;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const ActivitySelectBoxWrapper = styled.div`
@@ -175,9 +154,6 @@ const GenerationWrapper = styled.div`
 `;
 
 const GenerationText = styled.div`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
@@ -201,9 +177,6 @@ const PositionWrapper = styled.div`
 `;
 
 const PositionText = styled.div`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 17px;
   line-height: 22px;
   letter-spacing: -0.2px;
@@ -246,9 +219,6 @@ const ActivityItem = styled.li`
 const ActivityText = styled.div`
   height: 22px;
   left: 552px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 12px;
   line-height: 22px;
   letter-spacing: -0.2px;
@@ -270,20 +240,13 @@ const AgreeCheckBox = styled.input`
 `;
 
 const AgreeCheckText = styled.div`
-  width: 140px;
   height: 20px;
   margin-left: 8px;
-  margin-top: 2px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.2px;
   color: #0087d1;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const SignUpButtonWrapper = styled.button`
@@ -397,6 +360,28 @@ function SignUp() {
     onSubmit: () => {},
   });
 
+  const [focus, setFocus] = useState({
+    name: false,
+    email: false,
+    password: false,
+    phoneNumber: false,
+    major: false,
+    studentId: false,
+    gender: false,
+    generation: false,
+    position: false,
+    agreeCheck: false,
+  });
+
+  const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
+    setFocus({ ...focus, [e.target.name]: true });
+  };
+
+  const handleBlur: FocusEventHandler<HTMLInputElement> = e => {
+    formik.handleBlur(e);
+    setFocus({ ...focus, [e.target.name]: false });
+  };
+
   const GenderOptions = ['여성', '남성'];
   const GenerationOptions = ['7기', '8기', '9기'];
   const PositionOptions = ['대표', '부대표', '운영진', '아기사자'];
@@ -441,7 +426,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.name}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.name && formik.errors.name && (
             <Error>
@@ -457,7 +443,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.email}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.email && formik.errors.email && (
             <Error>
@@ -474,7 +461,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.password}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.password && formik.errors.password && (
             <Error>
@@ -490,7 +478,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.phoneNumber}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber && (
             <Error>
@@ -506,7 +495,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.major}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.major && formik.errors.major && (
             <Error>
@@ -522,7 +512,8 @@ function SignUp() {
             autoComplete='off'
             value={formik.values.studentId}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
           {formik.touched.studentId && formik.errors.studentId && (
             <Error>
@@ -635,7 +626,8 @@ function SignUp() {
             name='agreeCheck'
             value='agreeCheck'
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
 
           {/* <Link href="/#"> */}
@@ -648,7 +640,21 @@ function SignUp() {
             <ErrorText>{formik.errors.agreeCheck}</ErrorText>
           </ErrorFinal>
         )}
-        <SignUpButtonWrapper type='submit' disabled={!!formik.errors}>
+        <SignUpButtonWrapper
+          type='submit'
+          disabled={
+            !!formik.errors.name ||
+            !!formik.errors.password ||
+            !!formik.errors.email ||
+            !!formik.errors.phoneNumber ||
+            !!formik.errors.major ||
+            !!formik.errors.studentId ||
+            !!formik.errors.gender ||
+            !!formik.errors.generation ||
+            !!formik.errors.position ||
+            !!formik.errors.agreeCheck
+          }
+        >
           <SignUpButton>회원가입</SignUpButton>
         </SignUpButtonWrapper>
       </BodyWrapper>
