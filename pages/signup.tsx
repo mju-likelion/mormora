@@ -664,7 +664,17 @@ function SignUp() {
             !!formik.errors.gender ||
             !!formik.errors.generation ||
             !!formik.errors.position ||
-            !!formik.errors.agreeCheck
+            !!formik.errors.agreeCheck ||
+            !formik.values.name ||
+            !formik.values.password ||
+            !formik.values.email ||
+            !formik.values.phoneNumber ||
+            !formik.values.major ||
+            !formik.values.studentId ||
+            !formik.values.gender ||
+            !formik.values.generation ||
+            !formik.values.position ||
+            !formik.values.agreeCheck
           }
         >
           <SignUpButton>회원가입</SignUpButton>
