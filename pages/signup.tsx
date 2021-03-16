@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 // import Link from 'next/link';
 import { useFormik } from 'formik';
-import React, { useState, FocusEventHandler } from 'react';
+import { useState, FocusEventHandler, useRef } from 'react';
 import * as Yup from 'yup';
+import selectDown from 'images/selectDown.svg';
 
 const BodyWrapper = styled.div`
   padding: 64px 0 62px;
@@ -15,9 +16,6 @@ const BodyWrapper = styled.div`
 
 const Logo = styled.div`
   margin-top: 83px;
-  /* text-align: center;
-  width: 124px;
-  height: 48px; */
   font-size: 24px;
   color: rgba(255, 255, 255, 0.25);
 `;
@@ -59,13 +57,17 @@ const GenderSelectboxWrapper = styled.div`
   z-index: 2;
 `;
 
-const GenderWrapper = styled.div`
+const GenderWrapper = styled.input`
   display: flex;
   width: 336px;
   height: 44px;
   border-radius: 6px;
-  padding-left: 16px;
+  font-size: 17px;
+  line-height: 22px;
   background-color: #28292a;
+  color: #757575;
+  background: #28292a url(${selectDown}) right no-repeat;
+  background-origin: content-box;
   margin-bottom: 24px;
   border: 0px;
   outline-color: #8ffcff;
@@ -73,20 +75,6 @@ const GenderWrapper = styled.div`
   padding-right: 18px;
   justify-content: space-between;
   cursor: pointer;
-`;
-
-const GenderText = styled.div`
-  font-size: 17px;
-  line-height: 22px;
-  letter-spacing: -0.2px;
-  color: #757575;
-  margin-top: 11px;
-`;
-
-const SelectDown = styled.img`
-  width: 16px;
-  height: 8px;
-  margin-top: 18px;
 `;
 
 const GenderListWrapper = styled.div`
@@ -138,7 +126,7 @@ const ActivitySelectBoxWrapper = styled.div`
   position: relative;
 `;
 
-const GenerationWrapper = styled.div`
+const GenerationWrapper = styled.input`
   display: flex;
   width: 162px;
   height: 44px;
@@ -151,17 +139,15 @@ const GenerationWrapper = styled.div`
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
-`;
-
-const GenerationText = styled.div`
   font-size: 17px;
   line-height: 22px;
-  letter-spacing: -0.2px;
   color: #757575;
-  margin-top: 11px;
+  background: #28292a url(${selectDown}) right no-repeat;
+  background-origin: content-box;
+  cursor: pointer;
 `;
 
-const PositionWrapper = styled.div`
+const PositionWrapper = styled.input`
   display: flex;
   width: 162px;
   height: 44px;
@@ -174,14 +160,12 @@ const PositionWrapper = styled.div`
   padding-left: 16px;
   padding-right: 18px;
   justify-content: space-between;
-`;
-
-const PositionText = styled.div`
   font-size: 17px;
   line-height: 22px;
-  letter-spacing: -0.2px;
   color: #757575;
-  margin-top: 11px;
+  background: #28292a url(${selectDown}) right no-repeat;
+  background-origin: content-box;
+  cursor: pointer;
 `;
 
 const ActivityListWrapper = styled.div`
@@ -528,10 +512,17 @@ function SignUp() {
               </Error>
             )}
           <GenderSelectboxWrapper>
-            <GenderWrapper onClick={togglingGender}>
-              <GenderText>{selectedGender || 'Gender'}</GenderText>
-              <SelectDown src='/images/selectDown.svg' />
-            </GenderWrapper>
+            <GenderWrapper
+              onClick={togglingGender}
+              id='gender'
+              name='gender'
+              placeholder='Gender'
+              autoComplete='off'
+              value={selectedGender}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              readOnly={true}
+            ></GenderWrapper>
             {isGenderOpen && (
               <GenderListWrapper>
                 <GenderList>
@@ -557,12 +548,17 @@ function SignUp() {
 
           <ActivityWrapper>
             <ActivitySelectBoxWrapper>
-              <GenerationWrapper onClick={togglingGeneration}>
-                <GenerationText>
-                  {selectedGeneration || 'Generation'}
-                </GenerationText>
-                <SelectDown src='/images/selectDown.svg' />
-              </GenerationWrapper>
+              <GenerationWrapper
+                onClick={togglingGeneration}
+                id='generation'
+                name='generation'
+                placeholder='Generation'
+                autoComplete='off'
+                value={selectedGeneration}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+                readOnly={true}
+              ></GenerationWrapper>
               {isGenerationOpen && (
                 <ActivityListWrapper>
                   <ActivityList>
@@ -580,10 +576,17 @@ function SignUp() {
             </ActivitySelectBoxWrapper>
 
             <ActivitySelectBoxWrapper>
-              <PositionWrapper onClick={togglingPosition}>
-                <PositionText>{selectedPosition || 'Position'}</PositionText>
-                <SelectDown src='/images/selectDown.svg' />
-              </PositionWrapper>
+              <PositionWrapper
+                onClick={togglingPosition}
+                id='position'
+                name='position'
+                placeholder='Position'
+                autoComplete='off'
+                value={selectedPosition}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+                readOnly={true}
+              ></PositionWrapper>
               {isPositionOpen && (
                 <ActivityListWrapper>
                   <ActivityList>
