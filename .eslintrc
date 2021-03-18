@@ -3,7 +3,12 @@
     "browser": true,
     "node": true
   },
-  "extends": ["airbnb-typescript", "airbnb/hooks", "prettier"],
+  "extends": [
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "prettier",
+    "prettier/react"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -36,6 +41,7 @@
         "SwitchCase": 1
       }
     ],
+    "jsx-a11y/anchor-is-valid": "off",
     "no-console": "error",
     "no-unused-vars": "error",
     "react/jsx-props-no-spreading": "off",
@@ -44,6 +50,7 @@
   "settings": {
     "import/resolver": {
       "typescript": {}
-    }
+    },
+    "insert_final_newline": true
   }
 }

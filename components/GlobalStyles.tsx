@@ -12,6 +12,7 @@ function GlobalStyles() {
         body {
           padding: 0;
           margin: 0;
+          color: #ffffff;
           background-color: #141517;
         }
 
@@ -27,7 +28,7 @@ function GlobalStyles() {
 
         * {
           box-sizing: border-box;
-          color: #ffffff;
+          color: inherit;
         }
       `}
     />

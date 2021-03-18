@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import { useRef, useState } from 'react';
 
-import Modal from 'components/Modal';
+import Modal from 'components/AlertModal';
 import Portal from 'components/Portal';
 import { storageService } from 'lib/firebase';
 
