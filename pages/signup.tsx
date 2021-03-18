@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-// import Link from 'next/link';
 import { useFormik } from 'formik';
-import { useState, FocusEventHandler, useRef } from 'react';
+import { useState, FocusEventHandler } from 'react';
 import * as Yup from 'yup';
+import TermsofServiceModal from 'components/TermsofServiceModal';
+
 import selectDown from 'images/selectDown.svg';
 
 const BodyWrapper = styled.div`
@@ -96,6 +97,7 @@ const GenderList = styled.ul`
   list-style: none;
   text-align: center;
   margin: 8px 0;
+  cursor: pointer;
 `;
 
 const GenderItem = styled.li`
@@ -187,6 +189,7 @@ const ActivityList = styled.ul`
   list-style: none;
   text-align: center;
   margin: 8px 0;
+  cursor: pointer;
 `;
 
 const ActivityItem = styled.li`
@@ -366,6 +369,10 @@ function SignUp() {
     setFocus({ ...focus, [e.target.name]: false });
   };
 
+  const handleChange = e => {
+    setSelectedGender(e);
+  };
+
   const GenderOptions = ['여성', '남성'];
   const GenerationOptions = ['7기', '8기', '9기'];
   const PositionOptions = ['대표', '부대표', '운영진', '아기사자'];
@@ -374,9 +381,9 @@ function SignUp() {
   const [isGenerationOpen, setIsGenerationOpen] = useState(false);
   const [isPositionOpen, setIsPositionOpen] = useState(false);
 
-  const [selectedGender, setSelectedGender] = useState(null);
-  const [selectedGeneration, setSelectedGeneration] = useState(null);
-  const [selectedPosition, setSelectedPosition] = useState(null);
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedGeneration, setSelectedGeneration] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState('');
 
   const togglingGender = () => setIsGenderOpen(!isGenderOpen);
   const togglingGeneration = () => setIsGenerationOpen(!isGenerationOpen);
@@ -394,6 +401,16 @@ function SignUp() {
     setSelectedPosition(value);
     setIsPositionOpen(false);
   };
+
+  const [modal, setModal] = useState<React.ReactNode>(false);
+
+  function handleModalClose() {
+    setModal(false);
+  }
+
+  function handleModalOpen() {
+    setModal(<TermsofServiceModal onClose={handleModalClose} />);
+  }
 
   return (
     <>
@@ -521,8 +538,9 @@ function SignUp() {
               value={selectedGender}
               onBlur={handleBlur}
               onFocus={handleFocus}
+              onChange={() => setSelectedGender}
               readOnly={true}
-            ></GenderWrapper>
+            />
             {isGenderOpen && (
               <GenderListWrapper>
                 <GenderList>
@@ -558,7 +576,7 @@ function SignUp() {
                 onBlur={handleBlur}
                 onFocus={handleFocus}
                 readOnly={true}
-              ></GenerationWrapper>
+              />
               {isGenerationOpen && (
                 <ActivityListWrapper>
                   <ActivityList>
@@ -586,7 +604,7 @@ function SignUp() {
                 onBlur={handleBlur}
                 onFocus={handleFocus}
                 readOnly={true}
-              ></PositionWrapper>
+              />
               {isPositionOpen && (
                 <ActivityListWrapper>
                   <ActivityList>
@@ -643,9 +661,10 @@ function SignUp() {
             onFocus={handleFocus}
           />
 
-          {/* <Link href="/#"> */}
-          <AgreeCheckText>이용약관에 동의 (필수)</AgreeCheckText>
-          {/* </Link> */}
+          <AgreeCheckText onClick={handleModalOpen}>
+            이용약관에 동의 (필수)
+          </AgreeCheckText>
+          {modal}
         </AgreeCheckWrapper>
         {formik.touched.agreeCheck &&
           formik.errors.agreeCheck &&
