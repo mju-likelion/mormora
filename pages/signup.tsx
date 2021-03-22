@@ -296,9 +296,9 @@ interface Values {
   phoneNumber: string;
   major: string;
   studentId: string;
-  gender: string;
-  generation: string;
-  position: string;
+  gender: [];
+  generation: [];
+  position: [];
   github: string;
   agreeCheck: boolean;
 }
@@ -312,9 +312,9 @@ function SignUp() {
       phoneNumber: '',
       major: '',
       studentId: '',
-      gender: '',
-      generation: '',
-      position: '',
+      gender: [],
+      generation: [],
+      position: [],
       github: '',
       agreeCheck: true,
     },
@@ -698,7 +698,6 @@ function SignUp() {
             !formik.values.agreeCheck
           }
         >
-          {console.log('123', formik.values)}
           <SignUpButton>회원가입</SignUpButton>
         </SignUpButtonWrapper>
       </BodyWrapper>
