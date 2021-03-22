@@ -538,7 +538,6 @@ function SignUp() {
               value={selectedGender}
               onBlur={handleBlur}
               onFocus={handleFocus}
-              onChange={() => setSelectedGender}
               readOnly={true}
             />
             {isGenderOpen && (
@@ -699,6 +698,7 @@ function SignUp() {
             !formik.values.agreeCheck
           }
         >
+          {console.log('123', formik.values)}
           <SignUpButton>회원가입</SignUpButton>
         </SignUpButtonWrapper>
       </BodyWrapper>
