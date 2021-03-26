@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
 
 const FooterSelf = styled.footer`
   background-color: #1e252c;
@@ -95,44 +94,53 @@ function Footer() {
         <MjuLogo>LIKE LION | MJU Nature © {years}</MjuLogo>
         <MjuSnsWrapper>
           <SnsBlock>
-            <Link href='https://www.facebook.com/likelionatmju/'>
-              <a>
-                <SnsImage
-                  src='/images/sns-icon-facebook.svg'
-                  alt='멋쟁이 사자처럼 at 명지대 자연 페이스북'
-                />
-              </a>
-            </Link>
+            <a
+              target='_blank'
+              href='https://www.facebook.com/likelionatmju/'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 페이스북'
+            >
+              <SnsImage
+                src='/images/sns-icon-facebook.svg'
+                alt='멋쟁이 사자처럼 at 명지대 자연 페이스북'
+              />
+            </a>
           </SnsBlock>
           <SnsBlock>
             <SnsBetweenLine />
           </SnsBlock>
           <SnsBlock>
-            <Link href='https://www.instagram.com/mju_likelion/'>
-              <a>
-                <SnsImage
-                  src='/images/sns-icon-instagram.svg'
-                  width={19}
-                  height={19}
-                  alt='멋쟁이 사자처럼 at 명지대 자연 인스타그램'
-                />
-              </a>
-            </Link>
+            <a
+              target='_blank'
+              href='https://www.instagram.com/mju_likelion/'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 인스타그램'
+            >
+              <SnsImage
+                src='/images/sns-icon-instagram.svg'
+                width={19}
+                height={19}
+                alt='멋쟁이 사자처럼 at 명지대 자연 인스타그램'
+              />
+            </a>
           </SnsBlock>
           <SnsBlock>
             <SnsBetweenLine />
           </SnsBlock>
           <SnsGitMargin>
-            <Link href='https://github.com/mju-likelion'>
-              <a>
-                <SnsImage
-                  src='/images/sns-icon-github.svg'
-                  width={19}
-                  height={19}
-                  alt='멋쟁이 사자처럼 at 명지대 자연 깃허브'
-                />
-              </a>
-            </Link>
+            <a
+              target='_blank'
+              href='https://github.com/mju-likelion'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 깃허브'
+            >
+              <SnsImage
+                src='/images/sns-icon-github.svg'
+                width={19}
+                height={19}
+                alt='멋쟁이 사자처럼 at 명지대 자연 깃허브'
+              />
+            </a>
           </SnsGitMargin>
         </MjuSnsWrapper>
       </MaxWidthWrapper>
