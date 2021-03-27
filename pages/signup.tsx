@@ -296,9 +296,9 @@ interface Values {
   phoneNumber: string;
   major: string;
   studentId: string;
-  gender: [];
-  generation: [];
-  position: [];
+  gender: string;
+  generation: string;
+  position: string;
   github: string;
   agreeCheck: boolean;
 }
@@ -312,9 +312,9 @@ function SignUp() {
       phoneNumber: '',
       major: '',
       studentId: '',
-      gender: [],
-      generation: [],
-      position: [],
+      gender: '',
+      generation: '',
+      position: '',
       github: '',
       agreeCheck: true,
     },
@@ -367,10 +367,6 @@ function SignUp() {
   const handleBlur: FocusEventHandler<HTMLInputElement> = e => {
     formik.handleBlur(e);
     setFocus({ ...focus, [e.target.name]: false });
-  };
-
-  const handleChange = e => {
-    setSelectedGender(e);
   };
 
   const GenderOptions = ['여성', '남성'];
@@ -673,6 +669,7 @@ function SignUp() {
               <ErrorText>{formik.errors.agreeCheck}</ErrorText>
             </ErrorFinal>
           )}
+
         <SignUpButtonWrapper
           type='submit'
           disabled={
