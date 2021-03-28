@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import icModalClose from 'images/modal/icModalClose.svg';
 import icWarning from 'images/modal/icWarning.svg';
+import axios from 'lib/axios';
 
 interface SignInModalProps {
   onClose: () => void;
@@ -147,7 +148,10 @@ function SignInModal({ onClose }: SignInModalProps) {
         .min(8, '비밀번호는 최소 8글자 이상 입력해주세요.')
         .required('비밀번호를 입력해주세요.'),
     }),
-    onSubmit: () => {},
+    onSubmit: async ({ email, password }) => {
+      const result = await axios.post('/api/auth/login', { email, password });
+      console.log(result);
+    },
   });
 
   const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
@@ -163,7 +167,7 @@ function SignInModal({ onClose }: SignInModalProps) {
     <ModalFullScreen>
       <ModalBlock>
         <CloseButton onClick={onClose} />
-        <Form>
+        <Form onSubmit={formik.handleSubmit}>
           <Title>로그인</Title>
           <Input
             id='email'
@@ -193,6 +197,7 @@ function SignInModal({ onClose }: SignInModalProps) {
             formik.errors.password &&
             !focus.password && <Warning>{formik.errors.password}</Warning>}
           <LogInButton
+            type='submit'
             disabled={!!formik.errors.email || !!formik.errors.password}
           >
             로그인
