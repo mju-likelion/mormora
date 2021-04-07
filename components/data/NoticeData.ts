@@ -1,9 +1,9 @@
-type NoticeData = {
+interface NoticeData {
   number: number;
   noticeTitle: string;
   noticeWriter: string;
   noticeData: string;
-};
+}
 
 export default NoticeData;
 
@@ -17,8 +17,7 @@ export const noticeData: NoticeData[] = [
   {
     number: 2,
     noticeTitle: '첫번째 글 제목 첫번째 글 제목 첫번째 글 제목 첫번째 글 제목',
-    noticeWriter:
-      '작성자2 작성자2작성자2작성자2작성자2작성자2작성자2작성자2작성자2',
+    noticeWriter: '작성자2작성자2작성자2작성자2',
     noticeData: '2021-03-20',
   },
   {

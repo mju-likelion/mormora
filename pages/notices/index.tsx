@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import NoticeData, { noticeData } from '../../components/data/NoticeData';
 
@@ -49,6 +49,7 @@ const TableTitleContents = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 `;
 
 const TableNumberContents = styled.div`
@@ -56,9 +57,7 @@ const TableNumberContents = styled.div`
   text-align: center;
 `;
 
-const TableDateContents = styled.div`
-  /* width: 126px; */
-`;
+const TableDateContents = styled.div``;
 
 const TableWriterContents = styled.div`
   white-space: nowrap;
@@ -96,7 +95,9 @@ function NoticeList() {
           .map((item: NoticeData) => (
             <ContentsWrapper key={item.number}>
               <TableNumberContents>{item.number}</TableNumberContents>
-              <TableTitleContents>{item.noticeTitle}</TableTitleContents>
+              <Link href={`/notices/${encodeURIComponent(item.number)}`}>
+                <TableTitleContents>{item.noticeTitle}</TableTitleContents>
+              </Link>
               <TableWriterContents>{item.noticeWriter}</TableWriterContents>
               <TableDateContents>{item.noticeData}</TableDateContents>
             </ContentsWrapper>
