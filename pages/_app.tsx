@@ -6,6 +6,7 @@ import GlobalStyles from 'components/GlobalStyles';
 import theme from 'theme';
 
 import Footer from '../components/common/Footer';
+import Header from '../components/common/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,9 +16,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
+        <Header />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
-      <Footer />
     </>
   );
 }
