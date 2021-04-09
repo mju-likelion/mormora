@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import 'normalize.css';
 
 import importFonts from 'lib/importFonts';
 
@@ -22,6 +23,7 @@ function GlobalStyles() {
         }
 
         button {
+          background: none;
           border: none;
           cursor: pointer;
         }
