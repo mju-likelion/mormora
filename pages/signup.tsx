@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import { useState, FocusEventHandler } from 'react';
 import * as Yup from 'yup';
-import TermsofServiceModal from 'components/TermsofServiceModal';
 
+import TermsofServiceModal from 'components/TermsofServiceModal';
 import selectDown from 'images/selectDown.svg';
 
 const BodyWrapper = styled.div`
@@ -468,11 +468,11 @@ function SignUp() {
           {formik.touched.password &&
             formik.errors.password &&
             !focus.password && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.password}</ErrorText>
-              </Error>
-            )}
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.password}</ErrorText>
+            </Error>
+          )}
 
           <TextInput
             id='phoneNumber'
@@ -487,11 +487,11 @@ function SignUp() {
           {formik.touched.phoneNumber &&
             formik.errors.phoneNumber &&
             !focus.phoneNumber && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.phoneNumber}</ErrorText>
-              </Error>
-            )}
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.phoneNumber}</ErrorText>
+            </Error>
+          )}
 
           <TextInput
             id='major'
@@ -523,11 +523,11 @@ function SignUp() {
           {formik.touched.studentId &&
             formik.errors.studentId &&
             !focus.studentId && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.studentId}</ErrorText>
-              </Error>
-            )}
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.studentId}</ErrorText>
+            </Error>
+          )}
           <GenderSelectboxWrapper>
             <GenderWrapper
               onClick={togglingGender}
@@ -539,7 +539,7 @@ function SignUp() {
               onBlur={handleBlur}
               onFocus={handleFocus}
               onChange={() => setSelectedGender}
-              readOnly={true}
+              readOnly
             />
             {isGenderOpen && (
               <GenderListWrapper>
@@ -575,7 +575,7 @@ function SignUp() {
                 value={selectedGeneration}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
-                readOnly={true}
+                readOnly
               />
               {isGenerationOpen && (
                 <ActivityListWrapper>
@@ -603,7 +603,7 @@ function SignUp() {
                 value={selectedPosition}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
-                readOnly={true}
+                readOnly
               />
               {isPositionOpen && (
                 <ActivityListWrapper>
@@ -628,20 +628,20 @@ function SignUp() {
           {formik.touched.generation &&
             formik.errors.generation &&
             !focus.generation && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.generation}</ErrorText>
-              </Error>
-            )}
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.generation}</ErrorText>
+            </Error>
+          )}
 
           {formik.touched.position &&
             formik.errors.position &&
             !focus.position && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.position}</ErrorText>
-              </Error>
-            )}
+            <Error>
+              <Option src='/images/option.svg' />
+              <ErrorText>{formik.errors.position}</ErrorText>
+            </Error>
+          )}
 
           <TextInput
             id='github'
@@ -669,11 +669,11 @@ function SignUp() {
         {formik.touched.agreeCheck &&
           formik.errors.agreeCheck &&
           !focus.agreeCheck && (
-            <ErrorFinal>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.agreeCheck}</ErrorText>
-            </ErrorFinal>
-          )}
+          <ErrorFinal>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.agreeCheck}</ErrorText>
+          </ErrorFinal>
+        )}
         <SignUpButtonWrapper
           type='submit'
           disabled={

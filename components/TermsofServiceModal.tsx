@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import icModalClose from 'images/modal/icModalClose.svg';
 
 interface TermsofServiceModalProps {
