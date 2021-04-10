@@ -74,7 +74,8 @@ const Input = styled.input`
   margin: 11px 0 0;
   padding: 11px 12px;
   font-size: 17px;
-  font-weight: 22px;
+  font-weight: 400;
+  line-height: 22px;
 
   &:focus {
     outline: none;
