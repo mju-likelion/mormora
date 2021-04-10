@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 
-import NoticeData, { noticeData } from '../../components/data/NoticeData';
+// import NoticeData, { noticeData } from '../../components/data/NoticeData';
 
 const NoticeSelf = styled.div`
   max-width: 800px;
@@ -80,7 +80,8 @@ const ContentsWrapper = styled.div`
   border-bottom: 2px solid #28292a;
 `;
 
-function NoticeList() {
+function NoticeList({ items }) {
+  console.log(items);
   return (
     <NoticeSelf>
       <NoticeTitle>NOTICE</NoticeTitle>
@@ -91,11 +92,11 @@ function NoticeList() {
         <TableDate>날짜</TableDate>
       </SectionBlock>
       <ContentsDiv>
-        {noticeData
-          .map((item: NoticeData) => (
+        {items
+          .map(item => (
             <ContentsWrapper key={item.number}>
               <TableNumberContents>{item.number}</TableNumberContents>
-              <Link href={`/notices/${encodeURIComponent(item.number)}`}>
+              <Link href={`/notices/${item.number}`}>
                 <TableTitleContents>{item.noticeTitle}</TableTitleContents>
               </Link>
               <TableWriterContents>{item.noticeWriter}</TableWriterContents>
@@ -107,5 +108,12 @@ function NoticeList() {
     </NoticeSelf>
   );
 }
+
+NoticeList.getInitialProps = async () => {
+  const res = await import('../../components/data/NoticeData');
+  return {
+    items: res.noticeData,
+  };
+};
 
 export default NoticeList;
