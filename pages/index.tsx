@@ -1,21 +1,22 @@
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
+import LoginModal from 'components/LoginModal';
 import Portal from 'components/Portal';
-import SignInModal from 'components/SignInModal';
+import loginModalState from 'stores/loginModalState';
 
 function Home() {
-  const [signInModalOpen, setSignInModalOpen] = useState(true);
+  const [loginModalOpen, setLoginModalOpen] = useRecoilState(loginModalState);
 
-  function handleSignInModalClose() {
-    setSignInModalOpen(false);
+  function handleLoginModalClose() {
+    setLoginModalOpen(false);
   }
 
   return (
     <>
       준비중...
-      {signInModalOpen && (
+      {loginModalOpen && (
         <Portal>
-          <SignInModal onClose={handleSignInModalClose} />
+          <LoginModal onClose={handleLoginModalClose} />
         </Portal>
       )}
     </>

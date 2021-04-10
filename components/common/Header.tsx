@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import { useSetRecoilState } from 'recoil';
+
+import loginModalState from 'stores/loginModalState';
 
 const Self = styled.div`
   display: flex;
@@ -29,11 +32,17 @@ const BorderButton = styled(BorderlessButton)`
 `;
 
 function Header() {
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
+
+  function handleLoginOpen() {
+    setLoginModalOpen(true);
+  }
+
   return (
     <Self>
       <Left>LOGO PLACEHOLDER</Left>
       <Right>
-        <BorderlessButton>LOGIN</BorderlessButton>
+        <BorderlessButton onClick={handleLoginOpen}>LOGIN</BorderlessButton>
         <BorderButton>SIGNUP</BorderButton>
       </Right>
     </Self>
