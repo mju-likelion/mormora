@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 
 import loginModalState from 'stores/loginModalState';
@@ -43,7 +44,11 @@ function Header() {
       <Left>LOGO PLACEHOLDER</Left>
       <Right>
         <BorderlessButton onClick={handleLoginOpen}>LOGIN</BorderlessButton>
-        <BorderButton>SIGNUP</BorderButton>
+        <Link href='/signup'>
+          <a>
+            <BorderButton>SIGNUP</BorderButton>
+          </a>
+        </Link>
       </Right>
     </Self>
   );
