@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import icModalClose from 'images/modal/icModalClose.svg';
 import icWarning from 'images/modal/icWarning.svg';
 
-interface SignInModalProps {
+interface LoginModalProps {
   onClose: () => void;
 }
 
@@ -74,7 +74,8 @@ const Input = styled.input`
   margin: 11px 0 0;
   padding: 11px 12px;
   font-size: 17px;
-  font-weight: 22px;
+  font-weight: 400;
+  line-height: 22px;
 
   &:focus {
     outline: none;
@@ -128,7 +129,7 @@ const Paragraph = styled.p`
   margin: 0 0 14px;
 `;
 
-function SignInModal({ onClose }: SignInModalProps) {
+function LoginModal({ onClose }: LoginModalProps) {
   const [focus, setFocus] = useState({
     email: false,
     password: false,
@@ -216,4 +217,4 @@ function SignInModal({ onClose }: SignInModalProps) {
   );
 }
 
-export default SignInModal;
+export default LoginModal;
