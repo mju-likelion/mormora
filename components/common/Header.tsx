@@ -21,6 +21,7 @@ const Right = styled.div``;
 const BorderlessButton = styled.button`
   height: 35px;
   box-sizing: border-box;
+  outline-color: ${props => props.theme.colors.outline};
   font-size: 15px;
   line-height: 17px;
   padding: 0 16px;
@@ -45,9 +46,7 @@ function Header() {
       <Right>
         <BorderlessButton onClick={handleLoginOpen}>LOGIN</BorderlessButton>
         <Link href='/signup'>
-          <a>
-            <BorderButton>SIGNUP</BorderButton>
-          </a>
+          <BorderButton>SIGNUP</BorderButton>
         </Link>
       </Right>
     </Self>
