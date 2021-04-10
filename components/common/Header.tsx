@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
+import LoginModal from 'components/LoginModal';
+import Portal from 'components/Portal';
 import loginModalState from 'stores/loginModalState';
 
 const Self = styled.div`
@@ -34,22 +36,35 @@ const BorderButton = styled(BorderlessButton)`
 `;
 
 function Header() {
-  const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const [loginModalOpen, setLoginModalOpen] = useRecoilState(loginModalState);
 
-  function handleLoginOpen() {
+  function handleLoginModalOpen() {
     setLoginModalOpen(true);
   }
 
+  function handleLoginModalClose() {
+    setLoginModalOpen(false);
+  }
+
   return (
-    <Self>
-      <Left>LOGO PLACEHOLDER</Left>
-      <Right>
-        <BorderlessButton onClick={handleLoginOpen}>LOGIN</BorderlessButton>
-        <Link href='/signup'>
-          <BorderButton>SIGNUP</BorderButton>
-        </Link>
-      </Right>
-    </Self>
+    <>
+      <Self>
+        <Left>LOGO PLACEHOLDER</Left>
+        <Right>
+          <BorderlessButton onClick={handleLoginModalOpen}>
+            LOGIN
+          </BorderlessButton>
+          <Link href='/signup'>
+            <BorderButton>SIGNUP</BorderButton>
+          </Link>
+        </Right>
+      </Self>
+      {loginModalOpen && (
+        <Portal>
+          <LoginModal onClose={handleLoginModalClose} />
+        </Portal>
+      )}
+    </>
   );
 }
 
