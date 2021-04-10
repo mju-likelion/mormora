@@ -4,6 +4,7 @@ const theme = {
     orangeL1: '#FFCF53',
     whiteD1: '#a0a0a0',
     outline: '#8ffcff',
+    backgroundBlackL1: '#28292A',
   },
 };
 
