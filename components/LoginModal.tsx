@@ -2,15 +2,12 @@ import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import { FocusEventHandler, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
 
 import icModalClose from 'images/modal/icModalClose.svg';
 import icWarning from 'images/modal/icWarning.svg';
 import axios from 'lib/axios';
-
-interface LoginModalProps {
-  onClose: () => void;
-}
 
 const ModalFullScreen = styled.div`
   display: flex;
@@ -130,11 +127,17 @@ const Paragraph = styled.p`
   margin: 0 0 14px;
 `;
 
+interface LoginModalProps {
+  onClose: () => void;
+}
+
 function LoginModal({ onClose }: LoginModalProps) {
   const [focus, setFocus] = useState({
     email: false,
     password: false,
   });
+
+  const [, setCookie] = useCookies(['user']);
 
   const formik = useFormik({
     initialValues: {
@@ -150,8 +153,18 @@ function LoginModal({ onClose }: LoginModalProps) {
         .required('비밀번호를 입력해주세요.'),
     }),
     onSubmit: async ({ email, password }) => {
-      const result = await axios.post('/api/auth/login', { email, password });
-      console.log(result);
+      try {
+        const result = await axios.post('/api/auth/login', { email, password });
+
+        setCookie('user', result.headers.access_token, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+          sameSite: true,
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
     },
   });
 
