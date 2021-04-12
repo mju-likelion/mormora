@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FocusEventHandler, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
@@ -139,6 +140,8 @@ function LoginModal({ onClose }: LoginModalProps) {
 
   const [, setCookie] = useCookies(['user']);
 
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -161,6 +164,8 @@ function LoginModal({ onClose }: LoginModalProps) {
           maxAge: 60 * 60 * 24 * 7, // 7 days
           sameSite: true,
         });
+
+        router.reload();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
