@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import LoginModal from 'components/LoginModal';
 import Portal from 'components/Portal';
 import loginModalState from 'stores/loginModalState';
+import { useCookies } from 'react-cookie';
 
 const Self = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ const BorderButton = styled(BorderlessButton)`
 
 function Header() {
   const [loginModalOpen, setLoginModalOpen] = useRecoilState(loginModalState);
+  const [cookie] = useCookies(['user']);
 
   function handleLoginModalOpen() {
     setLoginModalOpen(true);
@@ -50,14 +52,20 @@ function Header() {
     <>
       <Self>
         <Left>LOGO PLACEHOLDER</Left>
-        <Right>
-          <BorderlessButton onClick={handleLoginModalOpen}>
-            LOGIN
-          </BorderlessButton>
-          <Link href='/signup'>
-            <BorderButton>SIGNUP</BorderButton>
-          </Link>
-        </Right>
+        {cookie ? (
+          <Right>
+            <BorderlessButton>MY PAGE</BorderlessButton>
+          </Right>
+        ) : (
+          <Right>
+            <BorderlessButton onClick={handleLoginModalOpen}>
+              LOGIN
+            </BorderlessButton>
+            <Link href='/signup'>
+              <BorderButton>SIGNUP</BorderButton>
+            </Link>
+          </Right>
+        )}
       </Self>
       {loginModalOpen && (
         <Portal>
