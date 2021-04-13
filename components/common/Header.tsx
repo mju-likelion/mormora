@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 
 import LoginModal from 'components/LoginModal';
 import Portal from 'components/Portal';
 import loginModalState from 'stores/loginModalState';
-import { useCookies } from 'react-cookie';
 
 const Self = styled.div`
   display: flex;
@@ -37,8 +38,13 @@ const BorderButton = styled(BorderlessButton)`
 `;
 
 function Header() {
+  const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useRecoilState(loginModalState);
   const [cookie] = useCookies(['user']);
+
+  function handleOpenMyPage() {
+    router.push('/mypage');
+  }
 
   function handleLoginModalOpen() {
     setLoginModalOpen(true);
@@ -54,7 +60,9 @@ function Header() {
         <Left>LOGO PLACEHOLDER</Left>
         {cookie ? (
           <Right>
-            <BorderlessButton>MY PAGE</BorderlessButton>
+            <BorderlessButton onClick={handleOpenMyPage}>
+              MY PAGE
+            </BorderlessButton>
           </Right>
         ) : (
           <Right>
