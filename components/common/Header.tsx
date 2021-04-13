@@ -14,7 +14,7 @@ const Self = styled.div`
   align-items: center;
   padding: 0 60px;
   width: 100vw;
-  height: 64px;
+  height: ${props => props.theme.constants.headerHeight};
   background: ${props => props.theme.colors.headerBackground};
 `;
 

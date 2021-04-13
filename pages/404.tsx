@@ -3,13 +3,27 @@ import Link from 'next/link';
 
 const Self = styled.div`
   display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: calc(
+    100vh - ${props => props.theme.constants.headerHeight} -
+      ${props => props.theme.constants.footerHeight.md}
+  );
+
+  @media (max-width: ${props => props.theme.screens.sm}) {
+    height: calc(
+      100vh - ${props => props.theme.constants.headerHeight} -
+        ${props => props.theme.constants.footerHeight.sm}
+    );
+  }
+
+  @media (max-width: ${props => props.theme.screens.xs}) {
+    height: calc(
+      100vh - ${props => props.theme.constants.headerHeight} -
+        ${props => props.theme.constants.footerHeight.xs}
+    );
+  }
 `;
 
 const ErrorMessageBlock = styled.div`
