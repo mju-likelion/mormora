@@ -65,7 +65,6 @@ const GenderWrapper = styled.input`
   border-radius: 6px;
   font-size: 17px;
   line-height: 22px;
-  background-color: #28292a;
   color: #757575;
   background: #28292a url(${selectDown}) right no-repeat;
   background-origin: content-box;
@@ -114,9 +113,8 @@ const GenderItem = styled.li`
 const ActivityWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  display: flex;
   width: 336px;
-  border: 0px;
+  border: 0;
   outline-color: #8ffcff;
   justify-content: space-between;
   cursor: pointer;
@@ -133,10 +131,8 @@ const GenerationWrapper = styled.input`
   width: 162px;
   height: 44px;
   border-radius: 6px;
-  padding-left: 16px;
-  background-color: #28292a;
   margin-bottom: 24px;
-  border: 0px;
+  border: 0;
   outline-color: #8ffcff;
   padding-left: 16px;
   padding-right: 18px;
@@ -154,10 +150,8 @@ const PositionWrapper = styled.input`
   width: 162px;
   height: 44px;
   border-radius: 6px;
-  padding-left: 16px;
-  background-color: #28292a;
   margin-bottom: 24px;
-  border: 0px;
+  border: 0;
   outline-color: #8ffcff;
   padding-left: 16px;
   padding-right: 18px;
@@ -412,7 +406,7 @@ function SignUp() {
     <>
       <BodyWrapper>
         <Logo>
-          Logo <br /> Placehorder
+          Logo <br /> Placeholder
         </Logo>
         <SignUpText>회원가입</SignUpText>
         <FormWrapper name='form' onSubmit={formik.handleSubmit}>
