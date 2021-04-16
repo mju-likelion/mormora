@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FocusEventHandler, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
 
 import icModalClose from 'images/modal/icModalClose.svg';
 import icWarning from 'images/modal/icWarning.svg';
-
-interface SignInModalProps {
-  onClose: () => void;
-}
+import axios from 'lib/axios';
 
 const ModalFullScreen = styled.div`
   display: flex;
@@ -74,7 +73,8 @@ const Input = styled.input`
   margin: 11px 0 0;
   padding: 11px 12px;
   font-size: 17px;
-  font-weight: 22px;
+  font-weight: 400;
+  line-height: 22px;
 
   &:focus {
     outline: none;
@@ -128,11 +128,19 @@ const Paragraph = styled.p`
   margin: 0 0 14px;
 `;
 
-function SignInModal({ onClose }: SignInModalProps) {
+interface LoginModalProps {
+  onClose: () => void;
+}
+
+function LoginModal({ onClose }: LoginModalProps) {
   const [focus, setFocus] = useState({
     email: false,
     password: false,
   });
+
+  const [, setCookie] = useCookies(['user']);
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -147,7 +155,22 @@ function SignInModal({ onClose }: SignInModalProps) {
         .min(8, '비밀번호는 최소 8글자 이상 입력해주세요.')
         .required('비밀번호를 입력해주세요.'),
     }),
-    onSubmit: () => {},
+    onSubmit: async ({ email, password }) => {
+      try {
+        const result = await axios.post('/api/auth/login', { email, password });
+
+        setCookie('user', result.headers.access_token, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+          sameSite: true,
+        });
+
+        router.reload();
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
+    },
   });
 
   const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
@@ -163,7 +186,7 @@ function SignInModal({ onClose }: SignInModalProps) {
     <ModalFullScreen>
       <ModalBlock>
         <CloseButton onClick={onClose} />
-        <Form>
+        <Form onSubmit={formik.handleSubmit}>
           <Title>로그인</Title>
           <Input
             id='email'
@@ -193,6 +216,7 @@ function SignInModal({ onClose }: SignInModalProps) {
             formik.errors.password &&
             !focus.password && <Warning>{formik.errors.password}</Warning>}
           <LogInButton
+            type='submit'
             disabled={!!formik.errors.email || !!formik.errors.password}
           >
             로그인
@@ -216,4 +240,4 @@ function SignInModal({ onClose }: SignInModalProps) {
   );
 }
 
-export default SignInModal;
+export default LoginModal;

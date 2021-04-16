@@ -35,3 +35,6 @@ yarn-error.log*
 
 # ssl
 cert/
+
+# jetbranins idea
+.idea/

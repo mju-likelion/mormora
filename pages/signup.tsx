@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import { useState, FocusEventHandler } from 'react';
 import * as Yup from 'yup';
-import TermsofServiceModal from 'components/TermsofServiceModal';
 
+import TermsofServiceModal from 'components/TermsofServiceModal';
 import selectDown from 'images/selectDown.svg';
 
 const BodyWrapper = styled.div`
@@ -534,7 +534,8 @@ function SignUp() {
               value={selectedGender}
               onBlur={handleBlur}
               onFocus={handleFocus}
-              readOnly={true}
+              onChange={() => setSelectedGender}
+              readOnly
             />
             {isGenderOpen && (
               <GenderListWrapper>
@@ -570,7 +571,7 @@ function SignUp() {
                 value={selectedGeneration}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
-                readOnly={true}
+                readOnly
               />
               {isGenerationOpen && (
                 <ActivityListWrapper>
@@ -598,7 +599,7 @@ function SignUp() {
                 value={selectedPosition}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
-                readOnly={true}
+                readOnly
               />
               {isPositionOpen && (
                 <ActivityListWrapper>
@@ -669,7 +670,6 @@ function SignUp() {
               <ErrorText>{formik.errors.agreeCheck}</ErrorText>
             </ErrorFinal>
           )}
-
         <SignUpButtonWrapper
           type='submit'
           disabled={

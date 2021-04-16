@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
-import { ReactElement } from 'react';
 
-const SectionSelf = styled.footer`
+const FooterSelf = styled.footer`
   background-color: #1e252c;
+`;
+
+const MaxWidthWrapper = styled.div`
   height: 62px;
   display: flex;
   padding: 22px 0;
@@ -27,7 +28,7 @@ const SectionSelf = styled.footer`
   }
 `;
 
-const SectionMjuLogo = styled.div`
+const MjuLogo = styled.div`
   margin-left: 95px;
   margin-right: auto;
 
@@ -36,7 +37,7 @@ const SectionMjuLogo = styled.div`
   }
 `;
 
-const SectionSnsWrap = styled.div`
+const MjuSnsWrapper = styled.div`
   display: inline-flex;
 
   @media screen and (max-width: 768px) {
@@ -48,7 +49,7 @@ const SectionSnsWrap = styled.div`
   }
 `;
 
-const SectionSnsLine = styled.div`
+const SnsBetweenLine = styled.div`
   margin-top: 8px;
   width: 35px;
   height: 2px;
@@ -61,11 +62,11 @@ const SectionSnsLine = styled.div`
   }
 `;
 
-const SectionSnsBlock = styled.div`
+const SnsBlock = styled.div`
   margin-right: 24px;
 `;
 
-const SectionSnsGit = styled.div`
+const SnsGitMargin = styled.div`
   margin-right: 165px;
 
   @media screen and (max-width: 768px) {
@@ -73,7 +74,7 @@ const SectionSnsGit = styled.div`
   }
 `;
 
-const SectionSns = styled.img`
+const SnsImage = styled.img`
   height: 19px;
   width: 19px;
 
@@ -83,56 +84,67 @@ const SectionSns = styled.img`
   }
 `;
 
-function Footer(): ReactElement {
+function Footer() {
   const date = new Date();
   const years = date.getFullYear();
 
   return (
-    <SectionSelf>
-      <SectionMjuLogo>LIKE LION | MJU Nature © {years}</SectionMjuLogo>
-      <SectionSnsWrap>
-        <SectionSnsBlock>
-          <Link href='https://www.facebook.com/likelionatmju/'>
-            <a>
-              <SectionSns
+    <FooterSelf>
+      <MaxWidthWrapper>
+        <MjuLogo>LIKE LION | MJU Nature © {years}</MjuLogo>
+        <MjuSnsWrapper>
+          <SnsBlock>
+            <a
+              target='_blank'
+              href='https://www.facebook.com/likelionatmju/'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 페이스북'
+            >
+              <SnsImage
                 src='/images/sns-icon-facebook.svg'
                 alt='멋쟁이 사자처럼 at 명지대 자연 페이스북'
               />
             </a>
-          </Link>
-        </SectionSnsBlock>
-        <SectionSnsBlock>
-          <SectionSnsLine />
-        </SectionSnsBlock>
-        <SectionSnsBlock>
-          <Link href='https://www.instagram.com/mju_likelion/'>
-            <a>
-              <SectionSns
+          </SnsBlock>
+          <SnsBlock>
+            <SnsBetweenLine />
+          </SnsBlock>
+          <SnsBlock>
+            <a
+              target='_blank'
+              href='https://www.instagram.com/mju_likelion/'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 인스타그램'
+            >
+              <SnsImage
                 src='/images/sns-icon-instagram.svg'
                 width={19}
                 height={19}
                 alt='멋쟁이 사자처럼 at 명지대 자연 인스타그램'
               />
             </a>
-          </Link>
-        </SectionSnsBlock>
-        <SectionSnsBlock>
-          <SectionSnsLine />
-        </SectionSnsBlock>
-        <SectionSnsGit>
-          <Link href='https://github.com/mju-likelion'>
-            <a>
-              <SectionSns
+          </SnsBlock>
+          <SnsBlock>
+            <SnsBetweenLine />
+          </SnsBlock>
+          <SnsGitMargin>
+            <a
+              target='_blank'
+              href='https://github.com/mju-likelion'
+              rel='noreferrer'
+              title='멋쟁이 사자처럼 at 명지대 자연 깃허브'
+            >
+              <SnsImage
                 src='/images/sns-icon-github.svg'
                 width={19}
                 height={19}
                 alt='멋쟁이 사자처럼 at 명지대 자연 깃허브'
               />
             </a>
-          </Link>
-        </SectionSnsGit>
-      </SectionSnsWrap>
-    </SectionSelf>
+          </SnsGitMargin>
+        </MjuSnsWrapper>
+      </MaxWidthWrapper>
+    </FooterSelf>
   );
 }
 export default Footer;
