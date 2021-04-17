@@ -23,10 +23,10 @@ const Logo = styled.div`
 
 const SignUpText = styled.div`
   margin-top: 40px;
-  width: 72px;
-  height: 22px;
+  color: #f5f5f5;
   text-align: center;
   font-size: 15px;
+  line-height: 22px;
 `;
 
 const FormWrapper = styled.form`
@@ -403,296 +403,290 @@ function SignUp() {
   }
 
   return (
-    <>
-      <BodyWrapper>
-        <Logo>
-          Logo <br /> Placeholder
-        </Logo>
-        <SignUpText>회원가입</SignUpText>
-        <FormWrapper name='form' onSubmit={formik.handleSubmit}>
-          <TextInput
-            id='name'
-            name='name'
-            placeholder='Name'
-            autoComplete='off'
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          {formik.touched.name && formik.errors.name && !focus.name && (
+    <BodyWrapper>
+      <Logo>
+        Logo <br /> Placeholder
+      </Logo>
+      <SignUpText>회원가입</SignUpText>
+      <FormWrapper name='form' onSubmit={formik.handleSubmit}>
+        <TextInput
+          id='name'
+          name='name'
+          placeholder='Name'
+          autoComplete='off'
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.name && formik.errors.name && !focus.name && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.name}</ErrorText>
+          </Error>
+        )}
+
+        <TextInput
+          id='email'
+          name='email'
+          placeholder='Email'
+          autoComplete='off'
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.email && formik.errors.email && !focus.email && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.email}</ErrorText>
+          </Error>
+        )}
+
+        <TextInput
+          id='password'
+          name='password'
+          type='password'
+          placeholder='Password'
+          autoComplete='off'
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.password && formik.errors.password && !focus.password && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.password}</ErrorText>
+          </Error>
+        )}
+
+        <TextInput
+          id='phoneNumber'
+          name='phoneNumber'
+          placeholder='Phone Number'
+          autoComplete='off'
+          value={formik.values.phoneNumber}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.phoneNumber &&
+          formik.errors.phoneNumber &&
+          !focus.phoneNumber && (
             <Error>
               <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.name}</ErrorText>
+              <ErrorText>{formik.errors.phoneNumber}</ErrorText>
             </Error>
           )}
 
-          <TextInput
-            id='email'
-            name='email'
-            placeholder='Email'
-            autoComplete='off'
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          {formik.touched.email && formik.errors.email && !focus.email && (
+        <TextInput
+          id='major'
+          name='major'
+          placeholder='Major'
+          autoComplete='off'
+          value={formik.values.major}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.major && formik.errors.major && !focus.major && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.major}</ErrorText>
+          </Error>
+        )}
+
+        <TextInput
+          id='studentId'
+          name='studentId'
+          placeholder='Student Id'
+          autoComplete='off'
+          value={formik.values.studentId}
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
+        {formik.touched.studentId &&
+          formik.errors.studentId &&
+          !focus.studentId && (
             <Error>
               <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.email}</ErrorText>
+              <ErrorText>{formik.errors.studentId}</ErrorText>
             </Error>
           )}
-
-          <TextInput
-            id='password'
-            name='password'
-            type='password'
-            placeholder='Password'
+        <GenderSelectboxWrapper>
+          <GenderWrapper
+            onClick={togglingGender}
+            id='gender'
+            name='gender'
+            placeholder='Gender'
             autoComplete='off'
-            value={formik.values.password}
-            onChange={formik.handleChange}
+            value={selectedGender}
             onBlur={handleBlur}
             onFocus={handleFocus}
+            onChange={() => setSelectedGender}
+            readOnly
           />
-          {formik.touched.password &&
-            formik.errors.password &&
-            !focus.password && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.password}</ErrorText>
-              </Error>
-            )}
-
-          <TextInput
-            id='phoneNumber'
-            name='phoneNumber'
-            placeholder='Phone Number'
-            autoComplete='off'
-            value={formik.values.phoneNumber}
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          {formik.touched.phoneNumber &&
-            formik.errors.phoneNumber &&
-            !focus.phoneNumber && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.phoneNumber}</ErrorText>
-              </Error>
-            )}
-
-          <TextInput
-            id='major'
-            name='major'
-            placeholder='Major'
-            autoComplete='off'
-            value={formik.values.major}
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          {formik.touched.major && formik.errors.major && !focus.major && (
-            <Error>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.major}</ErrorText>
-            </Error>
+          {isGenderOpen && (
+            <GenderListWrapper>
+              <GenderList>
+                {GenderOptions.map(option => (
+                  <GenderItem
+                    onClick={onGenderOptionClicked(option)}
+                    key={Math.random()}
+                  >
+                    {option}
+                  </GenderItem>
+                ))}
+              </GenderList>
+            </GenderListWrapper>
           )}
+        </GenderSelectboxWrapper>
 
-          <TextInput
-            id='studentId'
-            name='studentId'
-            placeholder='Student Id'
-            autoComplete='off'
-            value={formik.values.studentId}
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          {formik.touched.studentId &&
-            formik.errors.studentId &&
-            !focus.studentId && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.studentId}</ErrorText>
-              </Error>
-            )}
-          <GenderSelectboxWrapper>
-            <GenderWrapper
-              onClick={togglingGender}
-              id='gender'
-              name='gender'
-              placeholder='Gender'
+        {formik.touched.gender && formik.errors.gender && !focus.gender && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.gender}</ErrorText>
+          </Error>
+        )}
+
+        <ActivityWrapper>
+          <ActivitySelectBoxWrapper>
+            <GenerationWrapper
+              onClick={togglingGeneration}
+              id='generation'
+              name='generation'
+              placeholder='Generation'
               autoComplete='off'
-              value={selectedGender}
+              value={selectedGeneration}
               onBlur={handleBlur}
               onFocus={handleFocus}
-              onChange={() => setSelectedGender}
               readOnly
             />
-            {isGenderOpen && (
-              <GenderListWrapper>
-                <GenderList>
-                  {GenderOptions.map(option => (
-                    <GenderItem
-                      onClick={onGenderOptionClicked(option)}
+            {isGenerationOpen && (
+              <ActivityListWrapper>
+                <ActivityList>
+                  {GenerationOptions.map(option => (
+                    <ActivityItem
+                      onClick={onGenerationOptionClicked(option)}
                       key={Math.random()}
                     >
                       {option}
-                    </GenderItem>
+                    </ActivityItem>
                   ))}
-                </GenderList>
-              </GenderListWrapper>
+                </ActivityList>
+              </ActivityListWrapper>
             )}
-          </GenderSelectboxWrapper>
+          </ActivitySelectBoxWrapper>
 
-          {formik.touched.gender && formik.errors.gender && !focus.gender && (
+          <ActivitySelectBoxWrapper>
+            <PositionWrapper
+              onClick={togglingPosition}
+              id='position'
+              name='position'
+              placeholder='Position'
+              autoComplete='off'
+              value={selectedPosition}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              readOnly
+            />
+            {isPositionOpen && (
+              <ActivityListWrapper>
+                <ActivityList>
+                  {PositionOptions.map(option => (
+                    <ActivityItem
+                      onClick={onPositionOptionClicked(option)}
+                      key={Math.random()}
+                    >
+                      {option}
+                    </ActivityItem>
+                  ))}
+                </ActivityList>
+              </ActivityListWrapper>
+            )}
+          </ActivitySelectBoxWrapper>
+        </ActivityWrapper>
+        <ActivityText>
+          기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
+        </ActivityText>
+
+        {formik.touched.generation &&
+          formik.errors.generation &&
+          !focus.generation && (
             <Error>
               <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.gender}</ErrorText>
+              <ErrorText>{formik.errors.generation}</ErrorText>
             </Error>
           )}
 
-          <ActivityWrapper>
-            <ActivitySelectBoxWrapper>
-              <GenerationWrapper
-                onClick={togglingGeneration}
-                id='generation'
-                name='generation'
-                placeholder='Generation'
-                autoComplete='off'
-                value={selectedGeneration}
-                onBlur={handleBlur}
-                onFocus={handleFocus}
-                readOnly
-              />
-              {isGenerationOpen && (
-                <ActivityListWrapper>
-                  <ActivityList>
-                    {GenerationOptions.map(option => (
-                      <ActivityItem
-                        onClick={onGenerationOptionClicked(option)}
-                        key={Math.random()}
-                      >
-                        {option}
-                      </ActivityItem>
-                    ))}
-                  </ActivityList>
-                </ActivityListWrapper>
-              )}
-            </ActivitySelectBoxWrapper>
+        {formik.touched.position && formik.errors.position && !focus.position && (
+          <Error>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.position}</ErrorText>
+          </Error>
+        )}
 
-            <ActivitySelectBoxWrapper>
-              <PositionWrapper
-                onClick={togglingPosition}
-                id='position'
-                name='position'
-                placeholder='Position'
-                autoComplete='off'
-                value={selectedPosition}
-                onBlur={handleBlur}
-                onFocus={handleFocus}
-                readOnly
-              />
-              {isPositionOpen && (
-                <ActivityListWrapper>
-                  <ActivityList>
-                    {PositionOptions.map(option => (
-                      <ActivityItem
-                        onClick={onPositionOptionClicked(option)}
-                        key={Math.random()}
-                      >
-                        {option}
-                      </ActivityItem>
-                    ))}
-                  </ActivityList>
-                </ActivityListWrapper>
-              )}
-            </ActivitySelectBoxWrapper>
-          </ActivityWrapper>
-          <ActivityText>
-            기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
-          </ActivityText>
+        <TextInput
+          id='github'
+          name='github'
+          placeholder='Github'
+          autoComplete='off'
+        />
+      </FormWrapper>
 
-          {formik.touched.generation &&
-            formik.errors.generation &&
-            !focus.generation && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.generation}</ErrorText>
-              </Error>
-            )}
+      <AgreeCheckWrapper>
+        <AgreeCheckBox
+          type='checkbox'
+          name='agreeCheck'
+          value='agreeCheck'
+          onChange={formik.handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        />
 
-          {formik.touched.position &&
-            formik.errors.position &&
-            !focus.position && (
-              <Error>
-                <Option src='/images/option.svg' />
-                <ErrorText>{formik.errors.position}</ErrorText>
-              </Error>
-            )}
-
-          <TextInput
-            id='github'
-            name='github'
-            placeholder='Github'
-            autoComplete='off'
-          />
-        </FormWrapper>
-
-        <AgreeCheckWrapper>
-          <AgreeCheckBox
-            type='checkbox'
-            name='agreeCheck'
-            value='agreeCheck'
-            onChange={formik.handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-
-          <AgreeCheckText onClick={handleModalOpen}>
-            이용약관에 동의 (필수)
-          </AgreeCheckText>
-          {modal}
-        </AgreeCheckWrapper>
-        {formik.touched.agreeCheck &&
-          formik.errors.agreeCheck &&
-          !focus.agreeCheck && (
-            <ErrorFinal>
-              <Option src='/images/option.svg' />
-              <ErrorText>{formik.errors.agreeCheck}</ErrorText>
-            </ErrorFinal>
-          )}
-        <SignUpButtonWrapper
-          type='submit'
-          disabled={
-            !!formik.errors.name ||
-            !!formik.errors.password ||
-            !!formik.errors.email ||
-            !!formik.errors.phoneNumber ||
-            !!formik.errors.major ||
-            !!formik.errors.studentId ||
-            !!formik.errors.gender ||
-            !!formik.errors.generation ||
-            !!formik.errors.position ||
-            !!formik.errors.agreeCheck ||
-            !formik.values.name ||
-            !formik.values.password ||
-            !formik.values.email ||
-            !formik.values.phoneNumber ||
-            !formik.values.major ||
-            !formik.values.studentId ||
-            !formik.values.gender ||
-            !formik.values.generation ||
-            !formik.values.position ||
-            !formik.values.agreeCheck
-          }
-        >
-          <SignUpButton>회원가입</SignUpButton>
-        </SignUpButtonWrapper>
-      </BodyWrapper>
-    </>
+        <AgreeCheckText onClick={handleModalOpen}>
+          이용약관에 동의 (필수)
+        </AgreeCheckText>
+        {modal}
+      </AgreeCheckWrapper>
+      {formik.touched.agreeCheck &&
+        formik.errors.agreeCheck &&
+        !focus.agreeCheck && (
+          <ErrorFinal>
+            <Option src='/images/option.svg' />
+            <ErrorText>{formik.errors.agreeCheck}</ErrorText>
+          </ErrorFinal>
+        )}
+      <SignUpButtonWrapper
+        type='submit'
+        disabled={
+          !!formik.errors.name ||
+          !!formik.errors.password ||
+          !!formik.errors.email ||
+          !!formik.errors.phoneNumber ||
+          !!formik.errors.major ||
+          !!formik.errors.studentId ||
+          !!formik.errors.gender ||
+          !!formik.errors.generation ||
+          !!formik.errors.position ||
+          !!formik.errors.agreeCheck ||
+          !formik.values.name ||
+          !formik.values.password ||
+          !formik.values.email ||
+          !formik.values.phoneNumber ||
+          !formik.values.major ||
+          !formik.values.studentId ||
+          !formik.values.gender ||
+          !formik.values.generation ||
+          !formik.values.position ||
+          !formik.values.agreeCheck
+        }
+      >
+        <SignUpButton>회원가입</SignUpButton>
+      </SignUpButtonWrapper>
+    </BodyWrapper>
   );
 }
 
