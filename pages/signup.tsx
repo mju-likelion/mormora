@@ -4,19 +4,17 @@ import { useState, FocusEventHandler } from 'react';
 import * as Yup from 'yup';
 
 import TermsofServiceModal from 'components/TermsofServiceModal';
-import selectDown from 'images/selectDown.svg';
+import icSelectDown from 'images/icSelectDown.svg';
+import icWarning from 'images/icWarning.svg';
 
 const BodyWrapper = styled.div`
-  padding: 64px 0 62px;
-  background-color: #141517;
+  padding: 83px 0 112px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 `;
 
 const Logo = styled.div`
-  margin-top: 83px;
   font-size: 24px;
   color: rgba(255, 255, 255, 0.25);
 `;
@@ -66,7 +64,7 @@ const GenderWrapper = styled.input`
   font-size: 17px;
   line-height: 22px;
   color: #757575;
-  background: #28292a url(${selectDown}) right no-repeat;
+  background: #28292a url(${icSelectDown}) right no-repeat;
   background-origin: content-box;
   margin-bottom: 24px;
   border: 0px;
@@ -140,7 +138,7 @@ const GenerationWrapper = styled.input`
   font-size: 17px;
   line-height: 22px;
   color: #757575;
-  background: #28292a url(${selectDown}) right no-repeat;
+  background: #28292a url(${icSelectDown}) right no-repeat;
   background-origin: content-box;
   cursor: pointer;
 `;
@@ -159,7 +157,7 @@ const PositionWrapper = styled.input`
   font-size: 17px;
   line-height: 22px;
   color: #757575;
-  background: #28292a url(${selectDown}) right no-repeat;
+  background: #28292a url(${icSelectDown}) right no-repeat;
   background-origin: content-box;
   cursor: pointer;
 `;
@@ -421,7 +419,7 @@ function SignUp() {
         />
         {formik.touched.name && formik.errors.name && !focus.name && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.name}</ErrorText>
           </Error>
         )}
@@ -438,7 +436,7 @@ function SignUp() {
         />
         {formik.touched.email && formik.errors.email && !focus.email && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.email}</ErrorText>
           </Error>
         )}
@@ -456,7 +454,7 @@ function SignUp() {
         />
         {formik.touched.password && formik.errors.password && !focus.password && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.password}</ErrorText>
           </Error>
         )}
@@ -475,7 +473,7 @@ function SignUp() {
           formik.errors.phoneNumber &&
           !focus.phoneNumber && (
             <Error>
-              <Option src='/images/option.svg' />
+              <Option src={icWarning} />
               <ErrorText>{formik.errors.phoneNumber}</ErrorText>
             </Error>
           )}
@@ -492,7 +490,7 @@ function SignUp() {
         />
         {formik.touched.major && formik.errors.major && !focus.major && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.major}</ErrorText>
           </Error>
         )}
@@ -511,7 +509,7 @@ function SignUp() {
           formik.errors.studentId &&
           !focus.studentId && (
             <Error>
-              <Option src='/images/option.svg' />
+              <Option src={icWarning} />
               <ErrorText>{formik.errors.studentId}</ErrorText>
             </Error>
           )}
@@ -546,7 +544,7 @@ function SignUp() {
 
         {formik.touched.gender && formik.errors.gender && !focus.gender && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.gender}</ErrorText>
           </Error>
         )}
@@ -616,14 +614,14 @@ function SignUp() {
           formik.errors.generation &&
           !focus.generation && (
             <Error>
-              <Option src='/images/option.svg' />
+              <Option src={icWarning} />
               <ErrorText>{formik.errors.generation}</ErrorText>
             </Error>
           )}
 
         {formik.touched.position && formik.errors.position && !focus.position && (
           <Error>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.position}</ErrorText>
           </Error>
         )}
@@ -655,7 +653,7 @@ function SignUp() {
         formik.errors.agreeCheck &&
         !focus.agreeCheck && (
           <ErrorFinal>
-            <Option src='/images/option.svg' />
+            <Option src={icWarning} />
             <ErrorText>{formik.errors.agreeCheck}</ErrorText>
           </ErrorFinal>
         )}
