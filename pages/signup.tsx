@@ -356,10 +356,12 @@ function SignUp() {
     setSelectedGender(value);
     setIsGenderOpen(false);
   };
+
   const onGenerationOptionClicked = value => () => {
     setSelectedGeneration(value);
     setIsGenerationOpen(false);
   };
+
   const onPositionOptionClicked = value => () => {
     setSelectedPosition(value);
     setIsPositionOpen(false);
@@ -373,6 +375,17 @@ function SignUp() {
 
   function handleModalOpen() {
     setModal(<TermsofServiceModal onClose={handleModalClose} />);
+  }
+
+  function renderErrorMessage(fieldName: string) {
+    return formik.touched[fieldName] &&
+      formik.errors[fieldName] &&
+      !focus[fieldName] ? (
+      <Error>
+        <Option src={icWarning} />
+        <ErrorText>{formik.errors[fieldName]}</ErrorText>
+      </Error>
+    ) : null;
   }
 
   return (
@@ -392,12 +405,7 @@ function SignUp() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        {formik.touched.name && formik.errors.name && !focus.name && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.name}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('name')}
 
         <TextInput
           id='email'
@@ -409,12 +417,7 @@ function SignUp() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        {formik.touched.email && formik.errors.email && !focus.email && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.email}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('email')}
 
         <TextInput
           id='password'
@@ -427,12 +430,7 @@ function SignUp() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        {formik.touched.password && formik.errors.password && !focus.password && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.password}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('password')}
 
         <TextInput
           id='phoneNumber'
@@ -444,14 +442,7 @@ function SignUp() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        {formik.touched.phoneNumber &&
-          formik.errors.phoneNumber &&
-          !focus.phoneNumber && (
-            <Error>
-              <Option src={icWarning} />
-              <ErrorText>{formik.errors.phoneNumber}</ErrorText>
-            </Error>
-          )}
+        {renderErrorMessage('phoneNumber')}
 
         <TextInput
           id='major'
@@ -463,12 +454,7 @@ function SignUp() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        {formik.touched.major && formik.errors.major && !focus.major && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.major}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('major')}
 
         <TextInput
           id='studentId'
@@ -516,13 +502,7 @@ function SignUp() {
             </GenderListWrapper>
           )}
         </GenderSelectboxWrapper>
-
-        {formik.touched.gender && formik.errors.gender && !focus.gender && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.gender}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('gender')}
 
         <ActivityWrapper>
           <ActivitySelectBoxWrapper>
@@ -585,21 +565,8 @@ function SignUp() {
           기수 및 직책은 {new Date().getFullYear()}년 기준으로 선택해주세요.
         </ActivityText>
 
-        {formik.touched.generation &&
-          formik.errors.generation &&
-          !focus.generation && (
-            <Error>
-              <Option src={icWarning} />
-              <ErrorText>{formik.errors.generation}</ErrorText>
-            </Error>
-          )}
-
-        {formik.touched.position && formik.errors.position && !focus.position && (
-          <Error>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.position}</ErrorText>
-          </Error>
-        )}
+        {renderErrorMessage('generation')}
+        {renderErrorMessage('position')}
 
         <TextInput
           id='github'
@@ -607,58 +574,58 @@ function SignUp() {
           placeholder='Github'
           autoComplete='off'
         />
+
+        <AgreeCheckWrapper>
+          <AgreeCheckBox
+            type='checkbox'
+            name='agreeCheck'
+            value='agreeCheck'
+            onChange={formik.handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+          />
+
+          <AgreeCheckText onClick={handleModalOpen}>
+            이용약관에 동의 (필수)
+          </AgreeCheckText>
+          {modal}
+        </AgreeCheckWrapper>
+        {formik.touched.agreeCheck &&
+          formik.errors.agreeCheck &&
+          !focus.agreeCheck && (
+            <ErrorFinal>
+              <Option src={icWarning} />
+              <ErrorText>{formik.errors.agreeCheck}</ErrorText>
+            </ErrorFinal>
+          )}
+        <SignUpButtonWrapper
+          type='submit'
+          disabled={
+            !!formik.errors.name ||
+            !!formik.errors.password ||
+            !!formik.errors.email ||
+            !!formik.errors.phoneNumber ||
+            !!formik.errors.major ||
+            !!formik.errors.studentId ||
+            !!formik.errors.gender ||
+            !!formik.errors.generation ||
+            !!formik.errors.position ||
+            !!formik.errors.agreeCheck ||
+            !formik.values.name ||
+            !formik.values.password ||
+            !formik.values.email ||
+            !formik.values.phoneNumber ||
+            !formik.values.major ||
+            !formik.values.studentId ||
+            !formik.values.gender ||
+            !formik.values.generation ||
+            !formik.values.position ||
+            !formik.values.agreeCheck
+          }
+        >
+          <SignUpButton>회원가입</SignUpButton>
+        </SignUpButtonWrapper>
       </FormWrapper>
-
-      <AgreeCheckWrapper>
-        <AgreeCheckBox
-          type='checkbox'
-          name='agreeCheck'
-          value='agreeCheck'
-          onChange={formik.handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-        />
-
-        <AgreeCheckText onClick={handleModalOpen}>
-          이용약관에 동의 (필수)
-        </AgreeCheckText>
-        {modal}
-      </AgreeCheckWrapper>
-      {formik.touched.agreeCheck &&
-        formik.errors.agreeCheck &&
-        !focus.agreeCheck && (
-          <ErrorFinal>
-            <Option src={icWarning} />
-            <ErrorText>{formik.errors.agreeCheck}</ErrorText>
-          </ErrorFinal>
-        )}
-      <SignUpButtonWrapper
-        type='submit'
-        disabled={
-          !!formik.errors.name ||
-          !!formik.errors.password ||
-          !!formik.errors.email ||
-          !!formik.errors.phoneNumber ||
-          !!formik.errors.major ||
-          !!formik.errors.studentId ||
-          !!formik.errors.gender ||
-          !!formik.errors.generation ||
-          !!formik.errors.position ||
-          !!formik.errors.agreeCheck ||
-          !formik.values.name ||
-          !formik.values.password ||
-          !formik.values.email ||
-          !formik.values.phoneNumber ||
-          !formik.values.major ||
-          !formik.values.studentId ||
-          !formik.values.gender ||
-          !formik.values.generation ||
-          !formik.values.position ||
-          !formik.values.agreeCheck
-        }
-      >
-        <SignUpButton>회원가입</SignUpButton>
-      </SignUpButtonWrapper>
     </BodyWrapper>
   );
 }
